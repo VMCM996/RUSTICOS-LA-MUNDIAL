@@ -14,6 +14,7 @@ export default function CatalogSection({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('Todas');
   const [selectedCategory, setSelectedCategory] = useState('Todas');
+  const [selectedCondition, setSelectedCondition] = useState('Todas');
   const [maxPrice, setMaxPrice] = useState(100000);
   const [pageOffset, setPageOffset] = useState(0);
 
@@ -39,11 +40,26 @@ export default function CatalogSection({
       const matchesBrand = selectedBrand === 'Todas' || v.brand === selectedBrand;
       const matchesCategory =
         selectedCategory === 'Todas' || v.category === selectedCategory;
+      const matchesCondition =
+        selectedCondition === 'Todas' || v.condition === selectedCondition;
       const matchesPrice = v.price <= maxPrice;
 
-      return matchesQuery && matchesBrand && matchesCategory && matchesPrice;
+      return (
+        matchesQuery &&
+        matchesBrand &&
+        matchesCategory &&
+        matchesCondition &&
+        matchesPrice
+      );
     });
-  }, [vehicles, searchQuery, selectedBrand, selectedCategory, maxPrice]);
+  }, [
+    vehicles,
+    searchQuery,
+    selectedBrand,
+    selectedCategory,
+    selectedCondition,
+    maxPrice,
+  ]);
 
   const visibleVehicles = useMemo(() => {
     if (showAll) return filteredVehicles;
@@ -69,6 +85,7 @@ export default function CatalogSection({
     setSearchQuery('');
     setSelectedBrand('Todas');
     setSelectedCategory('Todas');
+    setSelectedCondition('Todas');
     setMaxPrice(100000);
     setPageOffset(0);
   };
@@ -139,6 +156,20 @@ export default function CatalogSection({
                   {cat === 'Todas' ? 'Todas las Categorías' : cat}
                 </option>
               ))}
+            </select>
+
+            <select
+              className="catalog-select-input"
+              value={selectedCondition}
+              onChange={(e) => {
+                setSelectedCondition(e.target.value);
+                setShowAll(true);
+              }}
+              aria-label="Filtrar por condición del vehículo"
+            >
+              <option value="Todas">Todas las Condiciones</option>
+              <option value="Nuevo">Nuevos (0 km)</option>
+              <option value="Seminuevo Certificado">Seminuevos Certificados</option>
             </select>
 
             <div className="catalog-price-range">

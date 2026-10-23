@@ -9,9 +9,9 @@ export default function FinanceCalculator({
 }) {
   const [vehicleId, setVehicleId] = useState(vehicles[0]?.id || '');
   const [customPrice, setCustomPrice] = useState(vehicles[0]?.price || 58900);
-  const [downPaymentPercent, setDownPaymentPercent] = useState(30);
-  const [termMonths, setTermMonths] = useState(48);
-  const [annualRate, setAnnualRate] = useState(9.5);
+  const [downPaymentPercent, setDownPaymentPercent] = useState(40);
+  const [termMonths, setTermMonths] = useState(24);
+  const [annualRate, setAnnualRate] = useState(12.0);
 
   useEffect(() => {
     if (selectedVehicle) {
@@ -122,8 +122,8 @@ export default function FinanceCalculator({
                 <input
                   id="calc-downpayment"
                   type="range"
-                  min="15"
-                  max="70"
+                  min="30"
+                  max="75"
                   step="5"
                   value={downPaymentPercent}
                   onChange={(e) => setDownPaymentPercent(Number(e.target.value))}
@@ -138,7 +138,7 @@ export default function FinanceCalculator({
                   <span className="range-value">{termMonths} meses</span>
                 </div>
                 <div className="category-pills">
-                  {[12, 24, 36, 48, 60, 72].map((months) => (
+                  {[12, 18, 24, 36, 48].map((months) => (
                     <button
                       key={months}
                       type="button"
@@ -161,8 +161,8 @@ export default function FinanceCalculator({
                 <input
                   id="calc-rate"
                   type="range"
-                  min="5.5"
-                  max="18.0"
+                  min="8.0"
+                  max="20.0"
                   step="0.5"
                   value={annualRate}
                   onChange={(e) => setAnnualRate(Number(e.target.value))}

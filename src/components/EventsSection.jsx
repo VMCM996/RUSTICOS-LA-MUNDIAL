@@ -3,6 +3,14 @@
 import { useState, useEffect } from 'react';
 import { EVENTS, EVENT_CATEGORIES } from '@/data/events';
 
+function getYouTubeEmbedUrl(url) {
+  if (!url) return null;
+  const regExp =
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const match = url.match(regExp);
+  return match ? `https://www.youtube-nocookie.com/embed/${match[1]}?autoplay=1` : null;
+}
+
 export default function EventsSection() {
   const [activeFilter, setActiveFilter] = useState('Todos');
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -206,17 +214,29 @@ export default function EventsSection() {
 
                 {activeMediaTab === 'video' && selectedEvent.hasVideo ? (
                   <div className="event-video-wrapper">
-                    <video
-                      key={selectedEvent.videoUrl}
-                      controls
-                      autoPlay
-                      playsInline
-                      poster={selectedEvent.coverImage}
-                      className="event-video-player"
-                    >
-                      <source src={selectedEvent.videoUrl} type="video/mp4" />
-                      Tu navegador no soporta la reproducción de video.
-                    </video>
+                    {getYouTubeEmbedUrl(selectedEvent.videoUrl) ? (
+                      <iframe
+                        src={getYouTubeEmbedUrl(selectedEvent.videoUrl)}
+                        title={selectedEvent.title}
+                        width="100%"
+                        height="380"
+                        style={{ border: 0, display: 'block' }}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <video
+                        key={selectedEvent.videoUrl}
+                        controls
+                        autoPlay
+                        playsInline
+                        poster={selectedEvent.coverImage}
+                        className="event-video-player"
+                      >
+                        <source src={selectedEvent.videoUrl} type="video/mp4" />
+                        Tu navegador no soporta la reproducción de video.
+                      </video>
+                    )}
                   </div>
                 ) : (
                   <div>

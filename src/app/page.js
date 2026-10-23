@@ -74,7 +74,11 @@ export default function HomePage() {
 
         <TrustBar />
 
-        <PromoBanners onSelectBrand={handleBrandFilterSelect} />
+        <PromoBanners
+          onSelectPromoAction={(note) => {
+            setPrefilledNote(note);
+          }}
+        />
 
         <EventsSection />
 

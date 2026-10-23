@@ -1175,6 +1175,21 @@ textarea {
   color: var(--text-primary);
 }
 
+.promo-kicker-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--jeep-gold);
+}
+
+.promo-banner-desc {
+  font-size: 0.85rem;
+  color: rgba(243, 244, 246, 0.9);
+  max-width: 34ch;
+  line-height: 1.45;
+}
+
 .btn-diagonal-outline {
   margin-top: 0.4rem;
   display: inline-flex;
@@ -2313,6 +2328,44 @@ input[type='range'] {
 .location-gps-actions {
   display: grid;
   gap: 0.65rem;
+}
+
+/* =========================================================
+   BOTÓN FLOTANTE DE WHATSAPP (MARACAIBO)
+   ========================================================= */
+.wa-float-btn {
+  position: fixed;
+  right: 1.35rem;
+  bottom: 1.35rem;
+  z-index: 85;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--jeep-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--jeep-gold);
+  border-radius: 999px;
+  padding: 0.7rem 1.15rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  box-shadow: 0 14px 30px -6px rgba(0, 0, 0, 0.65);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.wa-float-btn:hover {
+  transform: translateY(-3px);
+  background: var(--jeep-deep);
+}
+
+@media (max-width: 640px) {
+  .wa-float-label {
+    display: none;
+  }
+
+  .wa-float-btn {
+    padding: 0.8rem;
+  }
 }
 
 /* =========================================================

@@ -2,6 +2,7 @@ import { Outfit, Inter } from 'next/font/google';
 import './globals.css';
 import CookieBanner from '@/components/CookieBanner';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+import WhatsAppFloat from '@/components/WhatsAppFloat';
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -59,14 +60,54 @@ export const metadata = {
   },
 };
 
+const jsonLdAutoDealer = {
+  '@context': 'https://schema.org',
+  '@type': 'AutoDealer',
+  name: 'Rústicos Motors — Concesionario Oficial Jeep | Dodge | RAM Maracaibo',
+  url: siteUrl,
+  telephone: '+58-412-5554440',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Av. 2 (El Milagro), Sector Norte',
+    addressLocality: 'Maracaibo',
+    addressRegion: 'Zulia',
+    addressCountry: 'VE',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 10.6666,
+    longitude: -71.6124,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:30',
+      closes: '18:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Saturday'],
+      opens: '09:00',
+      closes: '16:00',
+    },
+  ],
+  brand: ['Jeep', 'Dodge', 'RAM'],
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="es" className={`${outfit.variable} ${inter.variable}`}>
       <head>
         <link rel="preconnect" href="https://images.unsplash.com" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdAutoDealer) }}
+        />
       </head>
       <body>
         {children}
+        <WhatsAppFloat />
         <CookieBanner />
         <GoogleAnalytics />
       </body>

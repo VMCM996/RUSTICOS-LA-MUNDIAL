@@ -2,22 +2,24 @@
 
 import BrandLogo from './BrandLogo';
 
-export default function PromoBanners({ onSelectBrand }) {
-  const handleBannerAction = (brand) => {
-    onSelectBrand(brand);
-    const el = document.getElementById('catalogo');
+export default function PromoBanners({ onSelectPromoAction }) {
+  const scrollTo = (id, presetNote) => {
+    if (onSelectPromoAction && presetNote) {
+      onSelectPromoAction(presetNote);
+    }
+    const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section id="promociones" className="diagonal-banners">
       <div className="diagonal-grid">
-        {/* Panel 1: JEEP */}
+        {/* Promoción 1: Plan Financiero */}
         <article className="diagonal-panel panel-jeep">
           <div className="diagonal-panel-bg">
             <img
-              src="https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&w=800&q=75"
-              alt="Promoción Jeep Wrangler Aventura Sin Límites 4x4"
+              src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=75"
+              alt="Plan de Financiamiento Directo en Maracaibo"
               width="600"
               height="290"
               loading="lazy"
@@ -26,28 +28,33 @@ export default function PromoBanners({ onSelectBrand }) {
           </div>
           <div className="diagonal-panel-content">
             <BrandLogo brand="Jeep" variant="light" size="sm" />
+            <span className="promo-kicker-tag">CRÉDITO EJECUTIVO ZULIA</span>
             <h3 className="diagonal-title">
-              AVENTURA
+              PLAN FINANCIERO
               <br />
-              SIN LÍMITES
+              ENTREGA INMEDIATA
             </h3>
+            <p className="promo-banner-desc">
+              Inicial desde el 30% y plazos de 12 a 48 meses con aprobación rápida en
+              nuestra sede de Maracaibo.
+            </p>
             <button
               type="button"
               className="btn-diagonal-outline"
-              onClick={() => handleBannerAction('Jeep')}
+              onClick={() => scrollTo('financiamiento')}
             >
-              <span>DESCUBRE MÁS</span>
+              <span>CALCULAR MI CUOTA</span>
               <span aria-hidden="true">→</span>
             </button>
           </div>
         </article>
 
-        {/* Panel 2: DODGE */}
+        {/* Promoción 2: Retoma Trade-In */}
         <article className="diagonal-panel panel-dodge">
           <div className="diagonal-panel-bg">
             <img
-              src="https://images.unsplash.com/photo-1612825173281-9a193378527e?auto=format&fit=crop&w=800&q=75"
-              alt="Promoción Dodge SRT Desempeño Que Impacta"
+              src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=75"
+              alt="Programa de Retoma de Vehículos en Maracaibo"
               width="600"
               height="290"
               loading="lazy"
@@ -56,28 +63,38 @@ export default function PromoBanners({ onSelectBrand }) {
           </div>
           <div className="diagonal-panel-content">
             <BrandLogo brand="Dodge" variant="light" size="sm" />
+            <span className="promo-kicker-tag">PROGRAMA TRADE-IN OFICIAL</span>
             <h3 className="diagonal-title">
-              DESEMPEÑO
+              RECIBIMOS TU 4X4
               <br />
-              QUE IMPACTA
+              COMO PARTE DE PAGO
             </h3>
+            <p className="promo-banner-desc">
+              Avalúo transparente y certificado en nuestro Showroom de Av. El Milagro para
+              que estrenes modelo hoy.
+            </p>
             <button
               type="button"
               className="btn-diagonal-outline"
-              onClick={() => handleBannerAction('Dodge')}
+              onClick={() =>
+                scrollTo(
+                  'test-drive',
+                  'Solicito avalúo de mi vehículo actual como parte de pago (Plan Retoma Maracaibo).'
+                )
+              }
             >
-              <span>DESCUBRE MÁS</span>
+              <span>SOLICITAR AVALÚO</span>
               <span aria-hidden="true">→</span>
             </button>
           </div>
         </article>
 
-        {/* Panel 3: RAM */}
+        {/* Promoción 3: Servicio Postventa Mopar */}
         <article className="diagonal-panel panel-ram">
           <div className="diagonal-panel-bg">
             <img
-              src="https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&fit=crop&w=800&q=75"
-              alt="Promoción RAM 1500 Fuerza En Cada Trabajo"
+              src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&q=75"
+              alt="Centro de Servicio Autorizado Mopar en Maracaibo"
               width="600"
               height="290"
               loading="lazy"
@@ -86,17 +103,26 @@ export default function PromoBanners({ onSelectBrand }) {
           </div>
           <div className="diagonal-panel-content">
             <BrandLogo brand="RAM" variant="light" size="sm" />
+            <span className="promo-kicker-tag">GARANTÍA Y POSTVENTA</span>
             <h3 className="diagonal-title">
-              FUERZA
-              <br />
-              EN CADA TRABAJO
+              SERVICIO OFICIAL
+              <br />Y REPUESTOS MOPAR®
             </h3>
+            <p className="promo-banner-desc">
+              Diagnóstico computarizado original, mantenimiento preventivo y accesorios
+              off-road instalados en fábrica.
+            </p>
             <button
               type="button"
               className="btn-diagonal-outline"
-              onClick={() => handleBannerAction('RAM')}
+              onClick={() =>
+                scrollTo(
+                  'test-drive',
+                  'Deseo agendar cita para Servicio Técnico / Accesorios Mopar en la sede de Maracaibo.'
+                )
+              }
             >
-              <span>DESCUBRE MÁS</span>
+              <span>AGENDAR SERVICIO</span>
               <span aria-hidden="true">→</span>
             </button>
           </div>

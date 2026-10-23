@@ -131,11 +131,25 @@ export default function TestDriveForm({
         currency: 'USD',
       });
 
+      const vehicleTitle = chosen
+        ? `${chosen.brand} ${chosen.model} (${chosen.year})`
+        : 'Vehículo seleccionado';
+
+      const waMessage = encodeURIComponent(
+        `Hola equipo de Rústicos Motors Maracaibo, acabo de registrar la solicitud *${data.leadId}*:\n` +
+          `• Nombre: ${formData.fullName}\n` +
+          `• Solicitud: ${formData.requestType}\n` +
+          `• Vehículo: ${vehicleTitle}\n` +
+          `• Fecha preferida: ${formData.preferredDate}\n` +
+          (formData.comments ? `• Nota: ${formData.comments}` : '')
+      );
+
       setSubmittedLead({
         leadId: data.leadId,
         fullName: formData.fullName,
         requestType: formData.requestType,
-        vehicleName: chosen ? `${chosen.brand} ${chosen.model}` : 'Vehículo seleccionado',
+        vehicleName: vehicleTitle,
+        waUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`,
       });
     } catch {
       setServerError('Error de conexión. Verifica tu red e intenta nuevamente.');
@@ -218,11 +232,22 @@ export default function TestDriveForm({
                   ¡Solicitud confirmada! (Código: {submittedLead.leadId})
                 </strong>
                 <p style={{ fontSize: '0.9rem', marginTop: '0.25rem' }}>
-                  Gracias, <strong>{submittedLead.fullName}</strong>. Nuestro equipo se
-                  comunicará contigo para coordinar tu{' '}
+                  Gracias, <strong>{submittedLead.fullName}</strong>. Nuestro equipo en
+                  Maracaibo se comunicará contigo para coordinar tu{' '}
                   <strong>{submittedLead.requestType}</strong> del{' '}
                   <strong>{submittedLead.vehicleName}</strong>.
                 </p>
+                {submittedLead.waUrl && (
+                  <a
+                    href={submittedLead.waUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                    style={{ marginTop: '0.75rem', width: '100%' }}
+                  >
+                    Enviar Ficha Directo al WhatsApp de Ventas Maracaibo →
+                  </a>
+                )}
               </div>
             )}
 

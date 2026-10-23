@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co',
+      },
     ],
   },
   async headers() {
@@ -23,7 +27,8 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: 'upgrade-insecure-requests',
+            value:
+              "upgrade-insecure-requests; frame-src 'self' https://maps.google.com https://www.google.com https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self';",
           },
           {
             key: 'X-Content-Type-Options',
@@ -36,6 +41,10 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(self)',
           },
         ],
       },
