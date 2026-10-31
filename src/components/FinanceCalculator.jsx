@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function FinanceCalculator({
   vehicles,
@@ -8,68 +8,27 @@ export default function FinanceCalculator({
   onSendToContact,
 }) {
   const [vehicleId, setVehicleId] = useState(vehicles[0]?.id || '');
-  const [customPrice, setCustomPrice] = useState(vehicles[0]?.price || 58900);
   const [downPaymentPercent, setDownPaymentPercent] = useState(40);
   const [termMonths, setTermMonths] = useState(24);
-  const [annualRate, setAnnualRate] = useState(12.0);
+  const [buyerProfile, setBuyerProfile] = useState('Persona Natural / Particular');
 
   useEffect(() => {
     if (selectedVehicle) {
       setVehicleId(selectedVehicle.id);
-      setCustomPrice(selectedVehicle.price);
     }
   }, [selectedVehicle]);
 
-  const handleVehicleChange = (e) => {
-    const id = e.target.value;
-    setVehicleId(id);
-    const found = vehicles.find((v) => v.id === id);
-    if (found) {
-      setCustomPrice(found.price);
-    }
-  };
-
-  const calculation = useMemo(() => {
-    const price = Number(customPrice) || 0;
-    const downPayment = Math.round((price * downPaymentPercent) / 100);
-    const loanAmount = Math.max(price - downPayment, 0);
-    const monthlyRate = annualRate / 100 / 12;
-
-    let monthlyPayment = 0;
-    if (loanAmount > 0 && termMonths > 0) {
-      if (monthlyRate === 0) {
-        monthlyPayment = loanAmount / termMonths;
-      } else {
-        monthlyPayment =
-          (loanAmount *
-            (monthlyRate * Math.pow(1 + monthlyRate, termMonths))) /
-          (Math.pow(1 + monthlyRate, termMonths) - 1);
-      }
-    }
-
-    const totalPayment = monthlyPayment * termMonths;
-    const totalInterest = Math.max(totalPayment - loanAmount, 0);
-
-    return {
-      price,
-      downPayment,
-      loanAmount,
-      monthlyPayment: Math.round(monthlyPayment),
-      totalInterest: Math.round(totalInterest),
-    };
-  }, [customPrice, downPaymentPercent, termMonths, annualRate]);
-
-  const currentVehicle = vehicles.find((v) => v.id === vehicleId);
+  const currentVehicle = vehicles.find((v) => v.id === vehicleId) || vehicles[0];
 
   return (
     <section id="financiamiento" className="section finance-section">
       <div className="container">
         <div className="section-header">
-          <span className="section-eyebrow">Simulador Financiero</span>
-          <h2 className="section-title">Calculadora de Financiamiento y Cuotas</h2>
+          <span className="section-eyebrow">Planes a tu Medida en Maracaibo</span>
+          <h2 className="section-title">Configura tu Solicitud de Financiamiento</h2>
           <p className="section-subtitle">
-            Personaliza tu cuota inicial, plazo en meses y tasa referencial para estimar el
-            plan de pagos de tu próximo 4x4, SUV o Pick-up.
+            Selecciona el modelo de tu interés, porcentaje de inicial deseada y plazo en
+            meses para consultar tu propuesta personalizada con un asesor.
           </p>
         </div>
 
@@ -78,46 +37,50 @@ export default function FinanceCalculator({
             <div style={{ display: 'grid', gap: '1.35rem' }}>
               <div className="field-group">
                 <label htmlFor="calc-vehicle" className="field-label">
-                  Seleccionar Vehículo del Inventario
+                  Seleccionar Modelo Disponible
                 </label>
                 <select
                   id="calc-vehicle"
                   className="field-select"
                   value={vehicleId}
-                  onChange={handleVehicleChange}
+                  onChange={(e) => setVehicleId(e.target.value)}
                 >
                   {vehicles.map((v) => (
                     <option key={v.id} value={v.id}>
-                      {v.brand} {v.model} ({v.year}) — ${v.price.toLocaleString('en-US')}
+                      {v.brand} {v.model} ({v.year}) — Consultar
                     </option>
                   ))}
                 </select>
               </div>
 
               <div className="field-group">
-                <label htmlFor="calc-price" className="field-label">
-                  Valor del Vehículo (USD)
+                <label htmlFor="calc-profile" className="field-label">
+                  Perfil del Solicitante
                 </label>
-                <input
-                  id="calc-price"
-                  type="number"
-                  min="10000"
-                  max="200000"
-                  step="500"
-                  className="field-input"
-                  value={customPrice}
-                  onChange={(e) => setCustomPrice(Number(e.target.value))}
-                />
+                <select
+                  id="calc-profile"
+                  className="field-select"
+                  value={buyerProfile}
+                  onChange={(e) => setBuyerProfile(e.target.value)}
+                >
+                  <option value="Persona Natural / Particular">
+                    Persona Natural / Particular
+                  </option>
+                  <option value="Persona Jurídica / Empresa">
+                    Persona Jurídica / Empresa
+                  </option>
+                  <option value="Flota Comercial / Agroindustrial">
+                    Flota Comercial / Agroindustrial
+                  </option>
+                </select>
               </div>
 
               <div className="field-group">
                 <div className="range-header">
                   <label htmlFor="calc-downpayment" className="field-label">
-                    Cuota Inicial ({downPaymentPercent}%)
+                    Porcentaje de Inicial Estimada
                   </label>
-                  <span className="range-value">
-                    ${calculation.downPayment.toLocaleString('en-US')} USD
-                  </span>
+                  <span className="range-value">{downPaymentPercent}% de Inicial</span>
                 </div>
                 <input
                   id="calc-downpayment"
@@ -133,7 +96,7 @@ export default function FinanceCalculator({
               <div className="field-group">
                 <div className="range-header">
                   <label htmlFor="calc-term" className="field-label">
-                    Plazo del Crédito
+                    Plazo Deseado de Financiamiento
                   </label>
                   <span className="range-value">{termMonths} meses</span>
                 </div>
@@ -150,69 +113,53 @@ export default function FinanceCalculator({
                   ))}
                 </div>
               </div>
-
-              <div className="field-group">
-                <div className="range-header">
-                  <label htmlFor="calc-rate" className="field-label">
-                    Tasa de Interés Anual Estimada (TEA)
-                  </label>
-                  <span className="range-value">{annualRate.toFixed(1)}%</span>
-                </div>
-                <input
-                  id="calc-rate"
-                  type="range"
-                  min="8.0"
-                  max="20.0"
-                  step="0.5"
-                  value={annualRate}
-                  onChange={(e) => setAnnualRate(Number(e.target.value))}
-                />
-              </div>
             </div>
           </div>
 
           <div className="finance-summary">
             <div>
               <span className="card-brand">
-                Resumen de Cotización •{' '}
+                Resumen de Solicitud •{' '}
                 {currentVehicle
                   ? `${currentVehicle.brand} ${currentVehicle.model}`
                   : 'Personalizado'}
               </span>
               <h3 style={{ fontSize: '1.4rem', marginTop: '0.25rem' }}>
-                Cuota Mensual Estimada
+                Cotización Personalizada
               </h3>
 
               <div className="monthly-quote-box">
-                <div className="monthly-amount">
-                  ${calculation.monthlyPayment.toLocaleString('en-US')}{' '}
-                  <span style={{ fontSize: '1rem', fontWeight: 500 }}>/ mes</span>
+                <div className="monthly-amount" style={{ fontSize: '1.75rem' }}>
+                  Consultar con Asesor
                 </div>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                  Durante {termMonths} meses con una tasa anual de {annualRate.toFixed(1)}%
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.3rem' }}>
+                  Nuestro equipo en Calle 72, Tierra Negra te enviará la propuesta exacta
+                  según tu inicial del {downPaymentPercent}% y plazo de {termMonths} meses.
                 </p>
               </div>
 
               <div className="breakdown-list">
                 <div className="breakdown-row">
-                  <span style={{ color: 'var(--text-secondary)' }}>Precio del vehículo</span>
-                  <strong>${calculation.price.toLocaleString('en-US')} USD</strong>
+                  <span style={{ color: 'var(--text-secondary)' }}>Modelo seleccionado</span>
+                  <strong>
+                    {currentVehicle?.brand} {currentVehicle?.model} ({currentVehicle?.year})
+                  </strong>
                 </div>
                 <div className="breakdown-row">
-                  <span style={{ color: 'var(--text-secondary)' }}>
-                    Inicial ({downPaymentPercent}%)
-                  </span>
-                  <strong>${calculation.downPayment.toLocaleString('en-US')} USD</strong>
+                  <span style={{ color: 'var(--text-secondary)' }}>Valor del vehículo</span>
+                  <strong>Consultar</strong>
                 </div>
                 <div className="breakdown-row">
-                  <span style={{ color: 'var(--text-secondary)' }}>Monto a financiar</span>
-                  <strong>${calculation.loanAmount.toLocaleString('en-US')} USD</strong>
+                  <span style={{ color: 'var(--text-secondary)' }}>Inicial propuesta</span>
+                  <strong>{downPaymentPercent}%</strong>
                 </div>
                 <div className="breakdown-row">
-                  <span style={{ color: 'var(--text-secondary)' }}>
-                    Intereses totales estimados
-                  </span>
-                  <strong>${calculation.totalInterest.toLocaleString('en-US')} USD</strong>
+                  <span style={{ color: 'var(--text-secondary)' }}>Plazo solicitado</span>
+                  <strong>{termMonths} meses</strong>
+                </div>
+                <div className="breakdown-row">
+                  <span style={{ color: 'var(--text-secondary)' }}>Modalidad</span>
+                  <strong>{buyerProfile}</strong>
                 </div>
               </div>
             </div>
@@ -224,15 +171,11 @@ export default function FinanceCalculator({
               onClick={() =>
                 onSendToContact(
                   currentVehicle,
-                  `Pre-aprobación: Inicial $${calculation.downPayment.toLocaleString(
-                    'en-US'
-                  )} (${downPaymentPercent}%) a ${termMonths} meses (Cuota aprox. $${calculation.monthlyPayment.toLocaleString(
-                    'en-US'
-                  )}/mes).`
+                  `Deseo consultar precio y plan de financiamiento para ${currentVehicle?.brand} ${currentVehicle?.model} (${currentVehicle?.year}): Inicial del ${downPaymentPercent}% a ${termMonths} meses (${buyerProfile}).`
                 )
               }
             >
-              Solicitar Pre-Aprobación con este Plan
+              Consultar este Plan con un Asesor →
             </button>
           </div>
         </div>

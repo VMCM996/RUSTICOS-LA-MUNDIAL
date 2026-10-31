@@ -129,31 +129,25 @@ textarea {
   font-size: 2.35rem;
 }
 
-/* DODGE // */
+/* DODGE FRATZOG (TRES TRIÁNGULOS NARANJA) */
 .brand-mark-dodge {
   font-family: var(--font-heading), sans-serif;
   font-weight: 900;
   letter-spacing: 0.08em;
   color: var(--dodge-black);
-  gap: 0.25rem;
+  gap: 0.38rem;
 }
 
 .brand-mark-dodge.is-light {
   color: var(--text-primary);
 }
 
-.dodge-stripes {
-  display: inline-flex;
-  gap: 3px;
-  margin-left: 2px;
-}
-
-.dodge-stripes i {
-  display: block;
-  width: 5px;
-  height: 1.05em;
-  background: var(--dodge-red);
-  transform: skewX(-24deg);
+.dodge-fratzog {
+  width: 1.45em;
+  height: 1.25em;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .brand-mark-sm.brand-mark-dodge {
@@ -166,7 +160,7 @@ textarea {
   font-size: 1.45rem;
 }
 
-/* RAM */
+/* RAM CARNERO */
 .brand-mark-ram {
   font-family: var(--font-heading), sans-serif;
   font-weight: 900;
@@ -180,8 +174,8 @@ textarea {
 }
 
 .ram-shield {
-  width: 1.35em;
-  height: 1.35em;
+  width: 1.55em;
+  height: 1.6em;
   flex-shrink: 0;
 }
 
@@ -219,10 +213,16 @@ textarea {
   gap: 1rem;
 }
 
+.header-left-group {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
 .header-location {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   color: var(--ink-dark);
   font-size: 0.85rem;
   font-weight: 500;
@@ -272,7 +272,27 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 1.25rem;
+  gap: 1rem;
+}
+
+.rusticos-navbar-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.rusticos-navbar-logo-link:hover {
+  transform: translateY(-1px);
+  opacity: 0.85;
+}
+
+.rusticos-navbar-logo-img {
+  height: 2.65rem;
+  width: auto;
+  display: block;
 }
 
 .whatsapp-header-cta {
@@ -627,7 +647,9 @@ textarea {
 
 .lineup-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 960px;
+  margin-inline: auto;
 }
 
 .lineup-column {
@@ -1051,7 +1073,7 @@ textarea {
 
 .trust-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 

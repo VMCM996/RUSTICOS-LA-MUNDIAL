@@ -8,11 +8,9 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container">
         <div className="footer-top-bar">
-          {/* Left: 3 Brand Logos */}
+          {/* Left: Brand Logos (Jeep | RAM) */}
           <div className="footer-brands">
             <BrandLogo brand="Jeep" variant="light" size="md" />
-            <span className="footer-divider" aria-hidden="true" />
-            <BrandLogo brand="Dodge" variant="light" size="md" />
             <span className="footer-divider" aria-hidden="true" />
             <BrandLogo brand="RAM" variant="light" size="md" />
           </div>
@@ -32,11 +30,11 @@ export default function Footer() {
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              <span>Maracaibo, Edo. Zulia, Venezuela</span>
+              <span>Calle 72, local 12-38, Tierra Negra, Maracaibo</span>
             </a>
 
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20deseo%20informaci%C3%B3n%20sobre%20el%20inventario%20Jeep%20Dodge%20RAM`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20deseo%20informaci%C3%B3n%20sobre%20el%20inventario%20Jeep%20y%20RAM%20en%20Maracaibo`}
               target="_blank"
               rel="noopener noreferrer"
               className="footer-meta-item footer-wa-link"
@@ -119,7 +117,7 @@ export default function Footer() {
 
         <div className="footer-bottom-bar">
           <span>
-            © 2026 Concesionario Jeep | Dodge | RAM. Todos los derechos reservados.
+            © 2026 Rústicos La Mundial, C.A. (RIF: J-50777406-4) — Concesionario Oficial Jeep | RAM en Maracaibo.
           </span>
 
           <div className="footer-legal-links">

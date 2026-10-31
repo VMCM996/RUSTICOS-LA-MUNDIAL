@@ -23,18 +23,19 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://rusticosmotors.com'
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Concesionario Jeep | Dodge | RAM Maracaibo — Tres Leyendas. Un Solo Destino.',
-    template: '%s | Concesionario Jeep • Dodge • RAM Maracaibo',
+    default: 'Rústicos La Mundial — Concesionario Oficial Jeep | RAM en Maracaibo',
+    template: '%s | Rústicos La Mundial Jeep • RAM Maracaibo',
   },
   description:
-    'Concesionario oficial Jeep, Dodge y RAM en Maracaibo, Estado Zulia, Venezuela. Explora nuestro inventario de 4x4 Wrangler, Grand Cherokee, Charger SRT y Pick-ups RAM 1500/2500 con financiamiento y garantía de fábrica.',
+    'Concesionario oficial Jeep y RAM en Maracaibo, Estado Zulia. Estamos ubicados en la Calle 72, local comercial 12-38, sector Tierra Negra. Conoce Jeep Renegade, Compass, Grand Cherokee, RAM 700 y RAM 1500 Lone Star.',
   keywords: [
     'Concesionario Jeep Maracaibo',
-    'Dodge Maracaibo',
-    'RAM 1500 Venezuela',
-    'Jeep Wrangler Rubicon 2025',
-    'Financiamiento de vehículos Maracaibo Zulia',
-    'Rústicos 4x4 Maracaibo',
+    'RAM Maracaibo',
+    'Rústicos La Mundial',
+    'Jeep Renegade 2027 Venezuela',
+    'Jeep Compass Longitude 2027',
+    'RAM 700 Bighorn Maracaibo',
+    'RAM 1500 Lone Star Zulia',
   ],
   alternates: {
     canonical: '/',
@@ -43,16 +44,16 @@ export const metadata = {
     type: 'website',
     locale: 'es_VE',
     url: siteUrl,
-    siteName: 'Rústicos Motors Maracaibo — Jeep | Dodge | RAM',
-    title: 'Tres Leyendas. Un Solo Destino: Jeep | Dodge | RAM en Maracaibo',
+    siteName: 'Rústicos La Mundial Maracaibo — Jeep | RAM',
+    title: 'Aventura y Fuerza en un Solo Lugar: Jeep | RAM en Maracaibo',
     description:
-      'Poder, estilo y capacidad. Conoce nuestro inventario, simula tu plan de financiamiento y agenda tu Test Drive en nuestra única sede en Maracaibo.',
+      'Capacidad 4x4, potencia y prestigio. Visítanos en Calle 72, local comercial 12-38, sector Tierra Negra, Maracaibo, Estado Zulia.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Concesionario Oficial Jeep | Dodge | RAM Maracaibo',
+    title: 'Rústicos La Mundial — Concesionario Oficial Jeep | RAM Maracaibo',
     description:
-      'Explora el inventario de Jeep Wrangler, Dodge Charger SRT y RAM 1500 en Maracaibo, Estado Zulia. Garantía oficial y planes de financiamiento a tu medida.',
+      'Explora los modelos disponibles Jeep Renegade, Compass, Grand Cherokee, RAM 700 y RAM 1500 Lone Star en Maracaibo, Estado Zulia.',
   },
   robots: {
     index: true,
@@ -63,36 +64,39 @@ export const metadata = {
 const jsonLdAutoDealer = {
   '@context': 'https://schema.org',
   '@type': 'AutoDealer',
-  name: 'Rústicos Motors — Concesionario Oficial Jeep | Dodge | RAM Maracaibo',
+  name: 'Rústicos La Mundial — Concesionario Oficial Jeep | RAM Maracaibo',
+  legalName: 'Rústicos La Mundial, C.A.',
+  taxID: 'J-50777406-4',
+  image: `${siteUrl}/images/showroom/fachada-atardecer.jpg`,
   url: siteUrl,
   telephone: '+58-412-5554440',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Av. 2 (El Milagro), Sector Norte',
+    streetAddress: 'Calle 72, local comercial 12-38, sector Tierra Negra',
     addressLocality: 'Maracaibo',
     addressRegion: 'Zulia',
     addressCountry: 'VE',
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 10.6666,
-    longitude: -71.6124,
+    latitude: 10.6695,
+    longitude: -71.6136,
   },
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '08:30',
-      closes: '18:00',
+      opens: '08:00',
+      closes: '17:00',
     },
     {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Saturday'],
-      opens: '09:00',
-      closes: '16:00',
+      opens: '08:00',
+      closes: '14:00',
     },
   ],
-  brand: ['Jeep', 'Dodge', 'RAM'],
+  brand: ['Jeep', 'RAM'],
 };
 
 export default function RootLayout({ children }) {

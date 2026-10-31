@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'Concesionario Jeep | Dodge | RAM — Tres Leyendas. Un Solo Destino.';
+export const alt = 'Rústicos La Mundial — Concesionario Oficial Jeep | RAM en Maracaibo';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -30,7 +30,7 @@ export default async function Image() {
             fontWeight: 700,
           }}
         >
-          TRES LEYENDAS. UN SOLO DESTINO.
+          AVENTURA Y FUERZA EN UN SOLO LUGAR.
         </div>
         <div
           style={{
@@ -44,8 +44,6 @@ export default async function Image() {
         >
           <span style={{ color: '#6b8e23' }}>JEEP</span>
           <span style={{ color: '#8a929a' }}>/</span>
-          <span style={{ color: '#dc2626' }}>DODGE</span>
-          <span style={{ color: '#8a929a' }}>/</span>
           <span style={{ color: '#f3f4f6' }}>RAM</span>
         </div>
         <div
@@ -55,7 +53,7 @@ export default async function Image() {
             maxWidth: 860,
           }}
         >
-          Poder • Estilo • Capacidad — Concesionario Oficial en Venezuela
+          Rústicos La Mundial, C.A. — Calle 72, Sector Tierra Negra, Maracaibo
         </div>
       </div>
     ),

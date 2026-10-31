@@ -1,9 +1,17 @@
 'use client';
 
 export default function Hero({ vehicles, onInspectVehicle }) {
-  const jeepHero = vehicles.find((v) => v.brand === 'Jeep') || vehicles[0];
-  const dodgeHero = vehicles.find((v) => v.brand === 'Dodge') || vehicles[1];
-  const ramHero = vehicles.find((v) => v.brand === 'RAM') || vehicles[2];
+  const leftHero =
+    vehicles.find((v) => v.id === 'jeep-renegade-sahara-2027') || vehicles[0];
+  const centerHero =
+    vehicles.find((v) => v.id === 'jeep-grand-cherokee-limited-2026') ||
+    vehicles[1] ||
+    vehicles[0];
+  const rightHero =
+    vehicles.find((v) => v.id === 'ram-700-slt-2026') ||
+    vehicles.find((v) => v.brand === 'RAM') ||
+    vehicles[2] ||
+    vehicles[0];
 
   const handleKeyActivate = (e, vehicle) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -17,23 +25,21 @@ export default function Hero({ vehicles, onInspectVehicle }) {
       <div className="hero-sky-overlay" />
 
       <div className="container hero-center-content">
-        <p className="hero-kicker">TRES LEYENDAS. UN SOLO DESTINO.</p>
+        <p className="hero-kicker">AVENTURA Y FUERZA EN UN SOLO LUGAR.</p>
 
         <h1 className="hero-trinity-title">
           <span className="trinity-jeep">JEEP</span>
-          <span className="trinity-slash">/</span>
-          <span className="trinity-dodge">DODGE</span>
           <span className="trinity-slash">/</span>
           <span className="trinity-ram">RAM</span>
         </h1>
 
         <p className="hero-subkicker">
-          PODER <span>/</span> ESTILO <span>/</span> CAPACIDAD
+          CAPACIDAD 4X4 <span>/</span> POTENCIA <span>/</span> PRESTIGIO
         </p>
 
         <p className="hero-lead">
-          En nuestro concesionario, las tres marcas más icónicas del mundo se unen para
-          ofrecerte la mejor experiencia en Venezuela.
+          En Rústicos La Mundial unimos la libertad todoterreno de Jeep y la fuerza
+          imparable de RAM para brindarte respaldo oficial en Maracaibo.
         </p>
 
         <div className="hero-cta-wrap">
@@ -42,7 +48,7 @@ export default function Hero({ vehicles, onInspectVehicle }) {
             <span aria-hidden="true">→</span>
           </a>
           <a href="#test-drive" className="btn-light-pill">
-            <span>AGENDAR TEST DRIVE</span>
+            <span>CONSULTAR CON UN ASESOR</span>
           </a>
         </div>
       </div>
@@ -51,16 +57,16 @@ export default function Hero({ vehicles, onInspectVehicle }) {
       <div className="container hero-trio-stage">
         <div
           className="trio-vehicle-card trio-left"
-          onClick={() => onInspectVehicle(jeepHero)}
+          onClick={() => onInspectVehicle(leftHero)}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => handleKeyActivate(e, jeepHero)}
-          aria-label={`Ver detalles de ${jeepHero.brand} ${jeepHero.model}`}
+          onKeyDown={(e) => handleKeyActivate(e, leftHero)}
+          aria-label={`Ver detalles de ${leftHero.brand} ${leftHero.model}`}
         >
           <div className="trio-vehicle-frame">
             <img
-              src={jeepHero.images[0]}
-              alt="Jeep Wrangler Rubicon 4x4 color verde militar en exhibición"
+              src={leftHero.images[0]}
+              alt={`${leftHero.brand} ${leftHero.model} en exhibición en Maracaibo`}
               width="420"
               height="235"
               fetchPriority="high"
@@ -68,22 +74,24 @@ export default function Hero({ vehicles, onInspectVehicle }) {
             />
           </div>
           <div className="trio-caption">
-            <span className="trio-tag trio-tag-jeep">JEEP WRANGLER RUBICON</span>
+            <span className="trio-tag trio-tag-jeep">
+              {leftHero.brand.toUpperCase()} {leftHero.model}
+            </span>
           </div>
         </div>
 
         <div
           className="trio-vehicle-card trio-center"
-          onClick={() => onInspectVehicle(dodgeHero)}
+          onClick={() => onInspectVehicle(centerHero)}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => handleKeyActivate(e, dodgeHero)}
-          aria-label={`Ver detalles de ${dodgeHero.brand} ${dodgeHero.model}`}
+          onKeyDown={(e) => handleKeyActivate(e, centerHero)}
+          aria-label={`Ver detalles de ${centerHero.brand} ${centerHero.model}`}
         >
           <div className="trio-vehicle-frame">
             <img
-              src={dodgeHero.images[0]}
-              alt="Dodge Charger SRT color rojo de alto desempeño frontal"
+              src={centerHero.images[0]}
+              alt={`${centerHero.brand} ${centerHero.model} disponible en Maracaibo`}
               width="450"
               height="235"
               fetchPriority="high"
@@ -91,22 +99,24 @@ export default function Hero({ vehicles, onInspectVehicle }) {
             />
           </div>
           <div className="trio-caption">
-            <span className="trio-tag trio-tag-dodge">DODGE CHARGER SRT</span>
+            <span className="trio-tag trio-tag-jeep">
+              {centerHero.brand.toUpperCase()} {centerHero.model}
+            </span>
           </div>
         </div>
 
         <div
           className="trio-vehicle-card trio-right"
-          onClick={() => onInspectVehicle(ramHero)}
+          onClick={() => onInspectVehicle(rightHero)}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => handleKeyActivate(e, ramHero)}
-          aria-label={`Ver detalles de ${ramHero.brand} ${ramHero.model}`}
+          onKeyDown={(e) => handleKeyActivate(e, rightHero)}
+          aria-label={`Ver detalles de ${rightHero.brand} ${rightHero.model}`}
         >
           <div className="trio-vehicle-frame">
             <img
-              src={ramHero.images[0]}
-              alt="Camioneta Pick-up RAM 1500 Night Edition color negro"
+              src={rightHero.images[0]}
+              alt={`Camioneta Pick-up ${rightHero.brand} ${rightHero.model} en Maracaibo`}
               width="420"
               height="235"
               fetchPriority="high"
@@ -114,7 +124,9 @@ export default function Hero({ vehicles, onInspectVehicle }) {
             />
           </div>
           <div className="trio-caption">
-            <span className="trio-tag trio-tag-ram">RAM 1500 NIGHT EDITION</span>
+            <span className="trio-tag trio-tag-ram">
+              {rightHero.brand.toUpperCase()} {rightHero.model}
+            </span>
           </div>
         </div>
       </div>

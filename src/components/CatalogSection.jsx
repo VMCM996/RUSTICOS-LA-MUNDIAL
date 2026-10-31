@@ -14,8 +14,6 @@ export default function CatalogSection({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('Todas');
   const [selectedCategory, setSelectedCategory] = useState('Todas');
-  const [selectedCondition, setSelectedCondition] = useState('Todas');
-  const [maxPrice, setMaxPrice] = useState(100000);
   const [pageOffset, setPageOffset] = useState(0);
 
   useEffect(() => {
@@ -40,26 +38,10 @@ export default function CatalogSection({
       const matchesBrand = selectedBrand === 'Todas' || v.brand === selectedBrand;
       const matchesCategory =
         selectedCategory === 'Todas' || v.category === selectedCategory;
-      const matchesCondition =
-        selectedCondition === 'Todas' || v.condition === selectedCondition;
-      const matchesPrice = v.price <= maxPrice;
 
-      return (
-        matchesQuery &&
-        matchesBrand &&
-        matchesCategory &&
-        matchesCondition &&
-        matchesPrice
-      );
+      return matchesQuery && matchesBrand && matchesCategory;
     });
-  }, [
-    vehicles,
-    searchQuery,
-    selectedBrand,
-    selectedCategory,
-    selectedCondition,
-    maxPrice,
-  ]);
+  }, [vehicles, searchQuery, selectedBrand, selectedCategory]);
 
   const visibleVehicles = useMemo(() => {
     if (showAll) return filteredVehicles;
@@ -85,8 +67,6 @@ export default function CatalogSection({
     setSearchQuery('');
     setSelectedBrand('Todas');
     setSelectedCategory('Todas');
-    setSelectedCondition('Todas');
-    setMaxPrice(100000);
     setPageOffset(0);
   };
 
@@ -94,7 +74,7 @@ export default function CatalogSection({
     <section id="catalogo" className="featured-catalog-section">
       <div className="container">
         <div className="featured-header">
-          <h2 className="featured-title">VEHÍCULOS DESTACADOS</h2>
+          <h2 className="featured-title">MODELOS DISPONIBLES EN MARACAIBO</h2>
 
           <button
             type="button"
@@ -104,7 +84,7 @@ export default function CatalogSection({
             <span>
               {showAll
                 ? 'Ver vista compacta (4 destacados)'
-                : 'Ver todos los vehículos y filtros'}
+                : `Ver los ${vehicles.length} modelos disponibles`}
             </span>
             <span aria-hidden="true">→</span>
           </button>
@@ -133,7 +113,7 @@ export default function CatalogSection({
             <input
               type="search"
               className="catalog-search-input"
-              placeholder="Buscar Wrangler, Charger, 1500, Hellcat..."
+              placeholder="Buscar Renegade, Compass, Grand Cherokee, RAM 700, 1500..."
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
@@ -157,38 +137,6 @@ export default function CatalogSection({
                 </option>
               ))}
             </select>
-
-            <select
-              className="catalog-select-input"
-              value={selectedCondition}
-              onChange={(e) => {
-                setSelectedCondition(e.target.value);
-                setShowAll(true);
-              }}
-              aria-label="Filtrar por condición del vehículo"
-            >
-              <option value="Todas">Todas las Condiciones</option>
-              <option value="Nuevo">Nuevos (0 km)</option>
-              <option value="Seminuevo Certificado">Seminuevos Certificados</option>
-            </select>
-
-            <div className="catalog-price-range">
-              <label htmlFor="max-price-slider">
-                Máx: <strong>${maxPrice.toLocaleString('en-US')}</strong>
-              </label>
-              <input
-                id="max-price-slider"
-                type="range"
-                min="50000"
-                max="100000"
-                step="2500"
-                value={maxPrice}
-                onChange={(e) => {
-                  setMaxPrice(Number(e.target.value));
-                  setShowAll(true);
-                }}
-              />
-            </div>
           </div>
         </div>
 
@@ -230,13 +178,17 @@ export default function CatalogSection({
           </div>
         ) : (
           <div className="empty-catalog-box">
-            <p>No se encontraron modelos con los criterios seleccionados.</p>
+            <p>
+              {selectedBrand === 'Dodge'
+                ? 'De momento no contamos con unidades Dodge disponibles en nuestro Showroom de Maracaibo. Explora nuestras unidades Jeep y RAM de entrega inmediata.'
+                : 'No se encontraron modelos con los criterios seleccionados.'}
+            </p>
             <button
               type="button"
               className="btn-dark-pill"
               onClick={handleResetFilters}
             >
-              Restablecer filtros
+              Ver todos los modelos disponibles
             </button>
           </div>
         )}

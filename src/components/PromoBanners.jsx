@@ -18,8 +18,8 @@ export default function PromoBanners({ onSelectPromoAction }) {
         <article className="diagonal-panel panel-jeep">
           <div className="diagonal-panel-bg">
             <img
-              src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=75"
-              alt="Plan de Financiamiento Directo en Maracaibo"
+              src="/images/showroom/fachada-atardecer.jpg"
+              alt="Plan de Financiamiento Directo en Rústicos La Mundial Maracaibo"
               width="600"
               height="290"
               loading="lazy"
@@ -35,7 +35,7 @@ export default function PromoBanners({ onSelectPromoAction }) {
               ENTREGA INMEDIATA
             </h3>
             <p className="promo-banner-desc">
-              Inicial desde el 30% y plazos de 12 a 48 meses con aprobación rápida en
+              Inicial desde el 30% y plazos de 12 a 48 meses con atención personalizada en
               nuestra sede de Maracaibo.
             </p>
             <button
@@ -43,35 +43,36 @@ export default function PromoBanners({ onSelectPromoAction }) {
               className="btn-diagonal-outline"
               onClick={() => scrollTo('financiamiento')}
             >
-              <span>CALCULAR MI CUOTA</span>
+              <span>CONSULTAR FINANCIAMIENTO</span>
               <span aria-hidden="true">→</span>
             </button>
           </div>
         </article>
 
-        {/* Promoción 2: Retoma Trade-In */}
+        {/* Promoción 2: Agendar Test Drive (con photo_2026-10-30_20-00-16 (2)) */}
         <article className="diagonal-panel panel-dodge">
           <div className="diagonal-panel-bg">
             <img
-              src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=75"
-              alt="Programa de Retoma de Vehículos en Maracaibo"
+              src="/images/showroom/fachada-test-drive.jpg"
+              alt="Unidad de Test Drive en Rústicos La Mundial Maracaibo"
               width="600"
               height="290"
               loading="lazy"
               decoding="async"
+              style={{ objectPosition: 'center 70%' }}
             />
           </div>
           <div className="diagonal-panel-content">
-            <BrandLogo brand="Dodge" variant="light" size="sm" />
-            <span className="promo-kicker-tag">PROGRAMA TRADE-IN OFICIAL</span>
+            <BrandLogo brand="Jeep" variant="light" size="sm" />
+            <span className="promo-kicker-tag">EXPERIENCIA DE MANEJO</span>
             <h3 className="diagonal-title">
-              RECIBIMOS TU 4X4
+              DESPUÉS DE MANEJARLA,
               <br />
-              COMO PARTE DE PAGO
+              LA VAS A QUERER
             </h3>
             <p className="promo-banner-desc">
-              Avalúo transparente y certificado en nuestro Showroom de Av. El Milagro para
-              que estrenes modelo hoy.
+              Reserva tu prueba de manejo en nuestra sede de Calle 72, sector Tierra Negra,
+              Maracaibo.
             </p>
             <button
               type="button"
@@ -79,22 +80,22 @@ export default function PromoBanners({ onSelectPromoAction }) {
               onClick={() =>
                 scrollTo(
                   'test-drive',
-                  'Solicito avalúo de mi vehículo actual como parte de pago (Plan Retoma Maracaibo).'
+                  'Deseo agendar una prueba de manejo (Test Drive) en la sede de Rústicos La Mundial Maracaibo.'
                 )
               }
             >
-              <span>SOLICITAR AVALÚO</span>
+              <span>AGENDAR TEST DRIVE</span>
               <span aria-hidden="true">→</span>
             </button>
           </div>
         </article>
 
-        {/* Promoción 3: Servicio Postventa Mopar */}
+        {/* Promoción 3: Servicio Postventa Mopar con imagen RAM */}
         <article className="diagonal-panel panel-ram">
           <div className="diagonal-panel-bg">
             <img
-              src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&q=75"
-              alt="Centro de Servicio Autorizado Mopar en Maracaibo"
+              src="/images/vehicles/ram700-hero.jpg"
+              alt="Camioneta RAM — Centro de Servicio Autorizado Mopar en Maracaibo"
               width="600"
               height="290"
               loading="lazy"
@@ -110,7 +111,7 @@ export default function PromoBanners({ onSelectPromoAction }) {
             </h3>
             <p className="promo-banner-desc">
               Diagnóstico computarizado original, mantenimiento preventivo y accesorios
-              off-road instalados en fábrica.
+              instalados en nuestra sede de Maracaibo.
             </p>
             <button
               type="button"
@@ -118,7 +119,7 @@ export default function PromoBanners({ onSelectPromoAction }) {
               onClick={() =>
                 scrollTo(
                   'test-drive',
-                  'Deseo agendar cita para Servicio Técnico / Accesorios Mopar en la sede de Maracaibo.'
+                  'Deseo agendar cita para Servicio Técnico / Repuestos Mopar en la sede de Maracaibo.'
                 )
               }
             >

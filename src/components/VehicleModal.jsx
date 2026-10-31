@@ -110,8 +110,8 @@ export default function VehicleModal({
                 <div className="spec-item-value">{vehicle.drivetrain}</div>
               </div>
               <div className="spec-item">
-                <div className="spec-item-label">Capacidad de Remolque</div>
-                <div className="spec-item-value">{vehicle.specs.capacidadRemolque}</div>
+                <div className="spec-item-label">Transmisión</div>
+                <div className="spec-item-value">{vehicle.transmission}</div>
               </div>
               <div className="spec-item">
                 <div className="spec-item-label">Altura Libre al Suelo</div>
@@ -141,10 +141,10 @@ export default function VehicleModal({
               }}
             >
               <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                Precio Referencial
+                Precio y Condiciones
               </span>
-              <span className="card-price" style={{ fontSize: '2rem' }}>
-                ${vehicle.price.toLocaleString('en-US')} USD
+              <span className="card-price" style={{ fontSize: '1.5rem' }}>
+                Consultar con un Asesor
               </span>
             </div>
 
@@ -178,14 +178,14 @@ export default function VehicleModal({
                 className="btn btn-primary"
                 onClick={() => onScheduleTestDrive(vehicle)}
               >
-                Agendar Test Drive de {vehicle.brand} {vehicle.model} →
+                Consultar / Agendar Test Drive de {vehicle.brand} {vehicle.model} →
               </button>
               <button
                 type="button"
                 className="btn btn-danger"
                 onClick={() => onQuoteFinance(vehicle)}
               >
-                Simular Financiamiento para este Modelo →
+                Consultar Plan de Financiamiento →
               </button>
             </div>
           </div>

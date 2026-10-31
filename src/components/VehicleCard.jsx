@@ -25,9 +25,7 @@ export default function VehicleCard({ vehicle, onSelectDetail, onSelectFinance }
           <span className="studio-year">{vehicle.year}</span>
         </div>
 
-        <span className="studio-price-pill">
-          ${vehicle.price.toLocaleString('en-US')}
-        </span>
+        <span className="studio-price-pill">Consultar</span>
       </div>
 
       <div
@@ -68,9 +66,9 @@ export default function VehicleCard({ vehicle, onSelectDetail, onSelectFinance }
           type="button"
           className="studio-quote-btn"
           onClick={() => onSelectFinance(vehicle)}
-          title="Simular financiamiento para este modelo"
+          title="Consultar disponibilidad y financiamiento para este modelo"
         >
-          Cotizar
+          Consultar
         </button>
       </div>
     </article>

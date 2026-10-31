@@ -3,16 +3,18 @@
 import { useState } from 'react';
 
 const MARACAIBO_COORDS = {
-  lat: 10.6666,
-  lng: -71.6124,
-  address: 'Av. 2 (El Milagro), Sector Norte, Showroom Oficial Jeep | Dodge | RAM, Maracaibo, Edo. Zulia',
+  lat: 10.6695,
+  lng: -71.6136,
+  query: 'Calle 72, local comercial 12-38, sector Tierra Negra, Maracaibo, estado Zulia',
+  address: 'Estamos ubicados en la Calle 72, local comercial 12-38, sector Tierra Negra, Maracaibo, estado Zulia.',
 };
 
 export default function LocationMapSection() {
   const [mapMode, setMapMode] = useState('m'); // 'm' = mapa estándar, 'k' = satélite
 
-  const embedUrl = `https://maps.google.com/maps?q=${MARACAIBO_COORDS.lat},${MARACAIBO_COORDS.lng}&t=${mapMode}&z=15&ie=UTF8&iwloc=&output=embed`;
-  const googleMapsExternalUrl = `https://www.google.com/maps/search/?api=1&query=${MARACAIBO_COORDS.lat},${MARACAIBO_COORDS.lng}`;
+  const encodedQuery = encodeURIComponent(MARACAIBO_COORDS.query);
+  const embedUrl = `https://maps.google.com/maps?q=${encodedQuery}&t=${mapMode}&z=16&ie=UTF8&iwloc=&output=embed`;
+  const googleMapsExternalUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
   const wazeExternalUrl = `https://waze.com/ul?ll=${MARACAIBO_COORDS.lat},${MARACAIBO_COORDS.lng}&navigate=yes`;
 
   return (
@@ -25,8 +27,8 @@ export default function LocationMapSection() {
               UBICACIÓN Y MAPA INTERACTIVO — MARACAIBO
             </h2>
             <p className="section-subtitle" style={{ marginTop: '0.35rem' }}>
-              Visítanos en nuestro Showroom y Centro de Servicio Mopar® en Maracaibo. Explora el
-              mapa interactivo o inicia tu ruta directa con GPS.
+              Visítanos en nuestro Showroom y Centro de Servicio Mopar® en Calle 72, Sector
+              Tierra Negra, Maracaibo. Explora el mapa interactivo o inicia tu ruta con GPS.
             </p>
           </div>
 
@@ -51,7 +53,7 @@ export default function LocationMapSection() {
         <div className="location-stage-grid">
           <div className="map-frame-card">
             <iframe
-              title="Mapa interactivo de la Sede Oficial Rústicos Motors en Maracaibo, Estado Zulia"
+              title="Mapa interactivo de la Sede Oficial Rústicos La Mundial en Calle 72, Tierra Negra, Maracaibo"
               src={embedUrl}
               width="100%"
               height="440"
@@ -63,16 +65,35 @@ export default function LocationMapSection() {
           </div>
 
           <aside className="location-details-card">
+            <div
+              style={{
+                borderRadius: '10px',
+                overflow: 'hidden',
+                marginBottom: '0.9rem',
+                border: '1px solid rgba(255,255,255,0.12)',
+              }}
+            >
+              <img
+                src="/images/showroom/fachada-atardecer.jpg"
+                alt="Fachada Oficial Rústicos La Mundial, C.A. en Maracaibo"
+                width="480"
+                height="200"
+                loading="lazy"
+                decoding="async"
+                style={{ width: '100%', height: '165px', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
+
             <div>
               <span className="card-brand" style={{ color: 'var(--jeep-gold)', fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                Sede Exclusiva Maracaibo
+                Rústicos La Mundial, C.A. • RIF J-50777406-4
               </span>
               <h3 style={{ fontSize: '1.45rem', marginTop: '0.35rem' }}>
-                Showroom Jeep | Dodge | RAM
+                Showroom Jeep | RAM
               </h3>
               <p style={{ color: 'var(--ram-chrome)', fontSize: '0.92rem', marginTop: '0.45rem' }}>
-                Contamos con exhibición climatizada, pista de prueba 4x4, taller certificado Mopar®
-                y estacionamiento privado con vigilancia para nuestros clientes.
+                Contamos con exhibición climatizada, unidades de Test Drive, taller certificado Mopar®
+                y estacionamiento privado con vigilancia para nuestros clientes en Maracaibo.
               </p>
             </div>
 
@@ -90,11 +111,11 @@ export default function LocationMapSection() {
               <div className="info-item">
                 <div className="info-badge">🕒</div>
                 <div>
-                  <strong>Horario Corrido</strong>
+                  <strong>Horario de Atención</strong>
                   <p style={{ color: 'var(--ram-chrome)', fontSize: '0.88rem' }}>
-                    Lunes a Viernes: 8:30 AM – 6:00 PM
+                    Lunes a Viernes: 8:00 AM – 5:00 PM
                     <br />
-                    Sábados: 9:00 AM – 4:00 PM
+                    Sábados: 8:00 AM – 2:00 PM
                   </p>
                 </div>
               </div>
@@ -104,7 +125,7 @@ export default function LocationMapSection() {
                 <div>
                   <strong>Servicios en Sede</strong>
                   <p style={{ color: 'var(--ram-chrome)', fontSize: '0.88rem' }}>
-                    Ventas de vehículos nuevos y seminuevos certificados, repuestos Mopar® y
+                    Ventas de vehículos nuevos 0 km, repuestos originales Mopar® y
                     servicio postventa especializado en el Zulia.
                   </p>
                 </div>

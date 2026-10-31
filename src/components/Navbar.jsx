@@ -16,32 +16,57 @@ export default function Navbar({ onSelectBrandFilter }) {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleReloadPage = (e) => {
+    e.preventDefault();
+    window.location.reload();
+  };
+
   return (
     <header className="site-header">
       {/* Top Tier Bar */}
       <div className="header-top">
         <div className="container header-top-inner">
-          {/* Fixed Sede Exclusiva: Maracaibo */}
-          <a
-            href="#ubicacion"
-            className="header-location"
-            title="Ver ubicación de nuestra sede única en Maracaibo en el mapa"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
+          {/* Left: Logo Oficial Rústicos La Mundial (Recarga la página) + Ubicación */}
+          <div className="header-left-group">
+            <a
+              href="/"
+              onClick={handleReloadPage}
+              className="rusticos-navbar-logo-link"
+              title="Rústicos La Mundial — Recargar página"
+              aria-label="Rústicos La Mundial — Recargar página de inicio"
             >
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
-            </svg>
-            <span className="location-fixed-badge">
-              Sede Única: <strong>Maracaibo, Zulia</strong>
-            </span>
-          </a>
+              <img
+                src="/images/logos/rusticos-la-mundial.svg"
+                alt="Logo Oficial Rústicos La Mundial"
+                width="148"
+                height="48"
+                className="rusticos-navbar-logo-img"
+              />
+            </a>
 
-          {/* Center Multi-Brand Logos */}
+            <span className="brand-divider" aria-hidden="true" />
+
+            <a
+              href="#ubicacion"
+              className="header-location"
+              title="Ver ubicación de nuestra sede única en Calle 72, Sector Tierra Negra, Maracaibo"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
+              </svg>
+              <span className="location-fixed-badge">
+                <strong>Maracaibo, Zulia</strong>
+              </span>
+            </a>
+          </div>
+
+          {/* Center Multi-Brand Logos (Jeep | Dodge | RAM) */}
           <div className="header-brands" aria-label="Marcas oficiales">
             <button
               type="button"
@@ -56,7 +81,7 @@ export default function Navbar({ onSelectBrandFilter }) {
               type="button"
               className="header-brand-btn"
               onClick={() => handleBrandClick('Dodge')}
-              title="Filtrar por modelos Dodge"
+              title="Marca oficial Dodge"
             >
               <BrandLogo brand="Dodge" size="md" />
             </button>
@@ -71,10 +96,10 @@ export default function Navbar({ onSelectBrandFilter }) {
             </button>
           </div>
 
-          {/* Right WhatsApp & Menu */}
+          {/* Right: WhatsApp + Mobile Menu */}
           <div className="header-actions">
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20deseo%20informaci%C3%B3n%20sobre%20el%20inventario%20Jeep%20Dodge%20RAM%20en%20Maracaibo`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20deseo%20consultar%20sobre%20los%20modelos%20Jeep%20y%20RAM%20disponibles%20en%20Maracaibo`}
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-header-cta"

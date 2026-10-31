@@ -165,13 +165,37 @@ export default function TestDriveForm({
           <span className="section-eyebrow">Atención Oficial en Venezuela</span>
           <h2 className="section-title">Agenda tu Test Drive o Solicita Cotización</h2>
           <p className="section-subtitle">
-            Pon a prueba la potencia de nuestras unidades Jeep, Dodge y RAM o solicita
-            evaluación para entregar tu vehículo actual a cuenta.
+            Pon a prueba la potencia de nuestras unidades Jeep y RAM o solicita
+            asesoría personalizada de financiamiento en nuestra sede de Maracaibo.
           </p>
         </div>
 
         <div className="contact-grid">
           <div className="info-card">
+            <div
+              style={{
+                borderRadius: '10px',
+                overflow: 'hidden',
+                border: '1px solid rgba(255,255,255,0.12)',
+              }}
+            >
+              <img
+                src="/images/showroom/fachada-test-drive.jpg"
+                alt="Unidad Test Drive frente a Rústicos La Mundial Maracaibo"
+                width="480"
+                height="260"
+                loading="lazy"
+                decoding="async"
+                style={{
+                  width: '100%',
+                  height: '220px',
+                  objectFit: 'cover',
+                  objectPosition: 'center 65%',
+                  display: 'block',
+                }}
+              />
+            </div>
+
             <div>
               <h3 style={{ fontSize: '1.3rem', marginBottom: '0.4rem' }}>
                 Showroom &amp; Centro de Servicio Autorizado
@@ -187,8 +211,8 @@ export default function TestDriveForm({
               <div>
                 <strong>Única Sede Oficial — Maracaibo</strong>
                 <p style={{ color: 'var(--ram-chrome)', fontSize: '0.9rem' }}>
-                  Av. 2 (El Milagro), Sector Norte, Showroom Oficial Jeep | Dodge | RAM,
-                  Maracaibo, Estado Zulia, Venezuela.
+                  Estamos ubicados en la Calle 72, local comercial 12-38, sector Tierra
+                  Negra, Maracaibo, estado Zulia.
                 </p>
               </div>
             </div>
@@ -198,8 +222,8 @@ export default function TestDriveForm({
               <div>
                 <strong>Horario de Atención</strong>
                 <p style={{ color: 'var(--ram-chrome)', fontSize: '0.9rem' }}>
-                  Lunes a Viernes: 8:30 AM – 6:00 PM <br />
-                  Sábados: 9:00 AM – 4:00 PM
+                  Lunes a Viernes: 8:00 AM – 5:00 PM <br />
+                  Sábados: 8:00 AM – 2:00 PM
                 </p>
               </div>
             </div>
@@ -358,8 +382,8 @@ export default function TestDriveForm({
                     <option value="Cotización y Financiamiento">
                       Cotización y Plan de Financiamiento
                     </option>
-                    <option value="Retoma de Vehículo">
-                      Entregar mi vehículo a cuenta
+                    <option value="Servicio Técnico / Repuestos Mopar">
+                      Servicio Técnico / Repuestos Mopar®
                     </option>
                   </select>
                 </div>
@@ -379,7 +403,7 @@ export default function TestDriveForm({
                   >
                     {vehicles.map((v) => (
                       <option key={v.id} value={v.id}>
-                        {v.brand} {v.model} ({v.year}) — ${v.price.toLocaleString('en-US')}
+                        {v.brand} {v.model} ({v.year}) — Consultar
                       </option>
                     ))}
                   </select>
@@ -418,7 +442,7 @@ export default function TestDriveForm({
                   rows="3"
                   maxLength={500}
                   className="field-textarea"
-                  placeholder="Indica tu horario preferido o si deseas evaluar un vehículo como parte de pago..."
+                  placeholder="Indica tu horario preferido, versión de interés (ej. Automática o Sincrónica) o consulta de financiamiento..."
                   value={formData.comments}
                   onChange={handleChange}
                 />
