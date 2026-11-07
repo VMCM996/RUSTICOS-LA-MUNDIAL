@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import BrandLogo from './BrandLogo';
 
 export default function VehicleCard({ vehicle, onSelectDetail, onSelectFinance }) {
@@ -36,13 +37,11 @@ export default function VehicleCard({ vehicle, onSelectDetail, onSelectFinance }
         onKeyDown={handleKeyActivate}
         aria-label={`Ver ficha técnica de ${vehicle.brand} ${vehicle.model}`}
       >
-        <img
+        <Image
           src={vehicle.images[0]}
           alt={`${vehicle.brand} ${vehicle.model} ${vehicle.year}`}
-          width="320"
-          height="145"
-          loading="lazy"
-          decoding="async"
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1080px) 50vw, 25vw"
         />
       </div>
 

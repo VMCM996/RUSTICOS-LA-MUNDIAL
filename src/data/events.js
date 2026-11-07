@@ -52,7 +52,7 @@ export const EVENTS = [
     gallery: [
       '/images/showroom/fachada-test-drive.jpg',
       '/images/showroom/test-drive-lateral.jpg',
-      '/images/vehicles/renegade-showroom-1.jpg',
+      '/images/vehicles/Sahara2027/SaharaOut1.webp',
     ],
   },
   {
@@ -65,7 +65,7 @@ export const EVENTS = [
     hasVideo: true,
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-red-sports-car-driving-on-a-highway-41563-large.mp4',
     videoDuration: '01:20',
-    coverImage: '/images/vehicles/ram1500-hurricane.jpg',
+    coverImage: '/images/vehicles/RAM1500/Ram1500Out2.webp',
     summary:
       'Presentación en piso de exhibición para el sector agroindustrial, petrolero y empresarial zuliano de la nueva RAM 1500 con motor Hurricane Twin-Turbo y la imponente RAM 3500 Heavy Duty 4x4.',
     highlights: [
@@ -74,9 +74,9 @@ export const EVENTS = [
       'Asesoría de flotas corporativas y repuestos originales Mopar',
     ],
     gallery: [
-      '/images/vehicles/ram1500-hurricane.jpg',
-      '/images/vehicles/ram1500-lonestar.jpg',
-      '/images/vehicles/ram3500-frontal.jpg',
+      '/images/vehicles/RAM1500/Ram1500Out2.webp',
+      '/images/vehicles/RAM1500/Ram1500Out1.webp',
+      '/images/vehicles/RAM1500/Ram1500Inside1.webp',
     ],
   },
 ];

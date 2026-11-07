@@ -42,6 +42,11 @@ export default function HomePage() {
   const handleScheduleTestDrive = (vehicle) => {
     setModalVehicle(null);
     setContactVehicle(vehicle);
+    setPrefilledNote({
+      note: `Deseo agendar una prueba de manejo (Test Drive) para ${vehicle.brand} ${vehicle.model} (${vehicle.year}) en la sede de Maracaibo.`,
+      requestType: 'Test Drive Presencial',
+      timestamp: Date.now(),
+    });
     scrollToSection('test-drive');
   };
 
@@ -49,7 +54,11 @@ export default function HomePage() {
     if (vehicle) {
       setContactVehicle(vehicle);
     }
-    setPrefilledNote(note);
+    setPrefilledNote({
+      note,
+      requestType: 'Cotización y Financiamiento',
+      timestamp: Date.now(),
+    });
     scrollToSection('test-drive');
   };
 
@@ -75,8 +84,13 @@ export default function HomePage() {
         <TrustBar />
 
         <PromoBanners
-          onSelectPromoAction={(note) => {
-            setPrefilledNote(note);
+          onSelectPromoAction={(actionPayload) => {
+            setPrefilledNote({
+              ...(typeof actionPayload === 'object'
+                ? actionPayload
+                : { note: actionPayload }),
+              timestamp: Date.now(),
+            });
           }}
         />
 

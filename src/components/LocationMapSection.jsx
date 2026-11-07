@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 const MARACAIBO_COORDS = {
   lat: 10.6695,
@@ -14,8 +15,6 @@ export default function LocationMapSection() {
 
   const encodedQuery = encodeURIComponent(MARACAIBO_COORDS.query);
   const embedUrl = `https://maps.google.com/maps?q=${encodedQuery}&t=${mapMode}&z=16&ie=UTF8&iwloc=&output=embed`;
-  const googleMapsExternalUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
-  const wazeExternalUrl = `https://waze.com/ul?ll=${MARACAIBO_COORDS.lat},${MARACAIBO_COORDS.lng}&navigate=yes`;
 
   return (
     <section id="ubicacion" className="section location-map-section">
@@ -56,8 +55,8 @@ export default function LocationMapSection() {
               title="Mapa interactivo de la Sede Oficial Rústicos La Mundial en Calle 72, Tierra Negra, Maracaibo"
               src={embedUrl}
               width="100%"
-              height="440"
-              style={{ border: 0, display: 'block' }}
+              height="100%"
+              style={{ border: 0, display: 'block', width: '100%', height: '100%', minHeight: '440px', flex: 1 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -67,20 +66,20 @@ export default function LocationMapSection() {
           <aside className="location-details-card">
             <div
               style={{
+                position: 'relative',
+                height: '165px',
                 borderRadius: '10px',
                 overflow: 'hidden',
                 marginBottom: '0.9rem',
                 border: '1px solid rgba(255,255,255,0.12)',
               }}
             >
-              <img
+              <Image
                 src="/images/showroom/fachada-atardecer.jpg"
                 alt="Fachada Oficial Rústicos La Mundial, C.A. en Maracaibo"
-                width="480"
-                height="200"
-                loading="lazy"
-                decoding="async"
-                style={{ width: '100%', height: '165px', objectFit: 'cover', display: 'block' }}
+                fill
+                sizes="(max-width: 1080px) 100vw, 480px"
+                style={{ objectFit: 'cover' }}
               />
             </div>
 
@@ -89,7 +88,7 @@ export default function LocationMapSection() {
                 Rústicos La Mundial, C.A. • RIF J-50777406-4
               </span>
               <h3 style={{ fontSize: '1.45rem', marginTop: '0.35rem' }}>
-                Showroom Jeep | RAM
+                Showroom Jeep | Dodge | RAM
               </h3>
               <p style={{ color: 'var(--ram-chrome)', fontSize: '0.92rem', marginTop: '0.45rem' }}>
                 Contamos con exhibición climatizada, unidades de Test Drive, taller certificado Mopar®
@@ -119,36 +118,6 @@ export default function LocationMapSection() {
                   </p>
                 </div>
               </div>
-
-              <div className="info-item">
-                <div className="info-badge">🛡️</div>
-                <div>
-                  <strong>Servicios en Sede</strong>
-                  <p style={{ color: 'var(--ram-chrome)', fontSize: '0.88rem' }}>
-                    Ventas de vehículos nuevos 0 km, repuestos originales Mopar® y
-                    servicio postventa especializado en el Zulia.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="location-gps-actions">
-              <a
-                href={googleMapsExternalUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                Abrir Ruta en Google Maps →
-              </a>
-              <a
-                href={wazeExternalUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-outline"
-              >
-                Navegar con Waze
-              </a>
             </div>
           </aside>
         </div>

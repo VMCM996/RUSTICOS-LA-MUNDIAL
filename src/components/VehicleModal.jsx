@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import BrandLogo from './BrandLogo';
 
 export default function VehicleModal({
@@ -10,17 +11,40 @@ export default function VehicleModal({
   onScheduleTestDrive,
 }) {
   const [activeImage, setActiveImage] = useState(0);
+  const modalRef = useRef(null);
+  const closeBtnRef = useRef(null);
 
   useEffect(() => {
     setActiveImage(0);
     if (!vehicle) return undefined;
 
+    const previouslyFocused = document.activeElement;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+
+    requestAnimationFrame(() => {
+      closeBtnRef.current?.focus();
+    });
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         onClose();
+        return;
+      }
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
 
@@ -28,6 +52,9 @@ export default function VehicleModal({
     return () => {
       document.body.style.overflow = prevOverflow;
       window.removeEventListener('keydown', handleKeyDown);
+      if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
+        previouslyFocused.focus();
+      }
     };
   }, [vehicle, onClose]);
 
@@ -42,6 +69,7 @@ export default function VehicleModal({
       onClick={onClose}
     >
       <div
+        ref={modalRef}
         className="modal-content"
         data-brand={vehicle.brand}
         onClick={(e) => e.stopPropagation()}
@@ -59,6 +87,7 @@ export default function VehicleModal({
             </div>
           </div>
           <button
+            ref={closeBtnRef}
             type="button"
             className="btn btn-outline"
             onClick={onClose}
@@ -70,13 +99,16 @@ export default function VehicleModal({
 
         <div className="modal-body">
           <div>
-            <div className="gallery-main">
-              <img
+            <div
+              className={`gallery-main ${
+                !/Out|Inside/i.test(vehicle.images[activeImage]) ? 'is-studio-shot' : ''
+              }`}
+            >
+              <Image
                 src={vehicle.images[activeImage]}
                 alt={`${vehicle.brand} ${vehicle.model} vista ${activeImage + 1}`}
-                width="520"
-                height="310"
-                decoding="async"
+                fill
+                sizes="(max-width: 1080px) 100vw, 520px"
               />
             </div>
 
@@ -85,16 +117,16 @@ export default function VehicleModal({
                 <button
                   key={imgUrl}
                   type="button"
-                  className={`thumb-btn ${activeImage === index ? 'active' : ''}`}
+                  className={`thumb-btn ${activeImage === index ? 'active' : ''} ${
+                    !/Out|Inside/i.test(imgUrl) ? 'is-studio-shot' : ''
+                  }`}
                   onClick={() => setActiveImage(index)}
                 >
-                  <img
+                  <Image
                     src={imgUrl}
                     alt={`Miniatura ${index + 1} de ${vehicle.model}`}
-                    width="160"
-                    height="72"
-                    loading="lazy"
-                    decoding="async"
+                    fill
+                    sizes="160px"
                   />
                 </button>
               ))}

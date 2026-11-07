@@ -2,8 +2,8 @@ import Link from 'next/link';
 import BrandLogo from '@/components/BrandLogo';
 
 export const metadata = {
-  title: 'Página no encontrada (404) | Concesionario Jeep • Dodge • RAM',
-  description: 'La ruta solicitada no existe. Regresa a nuestro catálogo oficial de vehículos.',
+  title: 'Página no encontrada (404) | Rústicos La Mundial Jeep • Dodge • RAM',
+  description: 'La ruta solicitada no existe. Regresa a nuestro catálogo oficial de vehículos en Maracaibo.',
 };
 
 export default function NotFound() {

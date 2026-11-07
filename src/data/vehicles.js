@@ -19,12 +19,17 @@ export const VEHICLES = [
     badge: 'Modelo 2027',
     shortDescription:
       'El nuevo Jeep Renegade Sahara 2027 destaca por su carrocería bicolor, techo solar panorámico CommandView, motor 1.3L Turbo T270 y tecnología ADAS de serie.',
+    heroImage: '/images/vehicles/Sahara2027/SaharaOut1.webp',
     images: [
-      '/images/vehicles/renegade-ext-3.jpg',
-      '/images/vehicles/renegade-hero.jpg',
-      '/images/vehicles/renegade-ext-2.jpg',
-      '/images/vehicles/renegade-interior.jpg',
-      '/images/vehicles/renegade-asiento-jeep.jpg',
+      '/images/vehicles/Sahara2027/SaharaFront.webp',
+      '/images/vehicles/Sahara2027/SaharaOut1.webp',
+      '/images/vehicles/Sahara2027/SaharaOut2.webp',
+      '/images/vehicles/Sahara2027/SaharaMidSide.webp',
+      '/images/vehicles/Sahara2027/SaharaSide.webp',
+      '/images/vehicles/Sahara2027/SaharaEnd.webp',
+      '/images/vehicles/Sahara2027/SaharaTop.webp',
+      '/images/vehicles/Sahara2027/SaharaInside1.webp',
+      '/images/vehicles/Sahara2027/SaharaInside2.webp',
     ],
     features: [
       'Motor 1.3L Turbo T270 de 175 HP y 270 Nm de torque',
@@ -61,12 +66,16 @@ export const VEHICLES = [
     badge: 'Modelo 2027',
     shortDescription:
       'Diseño audaz con acabados oscurecidos Altitude, motor 1.3L Turbo T270 de alto desempeño y equipamiento tecnológico completo para la ciudad y la aventura.',
+    heroImage: '/images/vehicles/Altitude2027/AltitudeOut2.webp',
     images: [
-      '/images/vehicles/renegade-verde.png',
-      '/images/vehicles/renegade-showroom-1.jpg',
-      '/images/vehicles/renegade-showroom-2.jpg',
-      '/images/vehicles/renegade-interior.jpg',
-      '/images/vehicles/renegade-asiento-jeep.jpg',
+      '/images/vehicles/Altitude2027/AltitudeFront.webp',
+      '/images/vehicles/Altitude2027/AltitudeOut2.webp',
+      '/images/vehicles/Altitude2027/AltitudeOut1.webp',
+      '/images/vehicles/Altitude2027/AltitudeMidSide.webp',
+      '/images/vehicles/Altitude2027/AltitudeSide.webp',
+      '/images/vehicles/Altitude2027/AltitudeBack.webp',
+      '/images/vehicles/Altitude2027/AltitudeInside1.webp',
+      '/images/vehicles/Altitude2027/AltitudeInside2.webp',
     ],
     features: [
       'Motor 1.3L Turbo T270 de 175 HP con respuesta inmediata',
@@ -103,12 +112,17 @@ export const VEHICLES = [
     badge: 'Modelo 2027',
     shortDescription:
       'El Jeep Compass Longitude 2027 combina elegancia ejecutiva, pantalla flotante de 10.1" de alta definición, asientos en cuero y el empuje del motor Turbo T270.',
+    heroImage: '/images/vehicles/Compass2027/CompassOut1.webp',
     images: [
-      '/images/vehicles/compass-hero.jpg',
-      '/images/vehicles/compass-ext-2.jpg',
-      '/images/vehicles/compass-ext-3.jpg',
-      '/images/vehicles/compass-int-1.jpg',
-      '/images/vehicles/compass-int-2.jpg',
+      '/images/vehicles/Compass2027/CompassFront.webp',
+      '/images/vehicles/Compass2027/CompassOut1.webp',
+      '/images/vehicles/Compass2027/CompassOut2.webp',
+      '/images/vehicles/Compass2027/CompassMidSide.webp',
+      '/images/vehicles/Compass2027/CompassSide.webp',
+      '/images/vehicles/Compass2027/CompassBack.webp',
+      '/images/vehicles/Compass2027/CompassMidTop.webp',
+      '/images/vehicles/Compass2027/CompassInside1.webp',
+      '/images/vehicles/Compass2027/CompassInside2.webp',
     ],
     features: [
       'Pantalla táctil flotante de 10.1" con sistema Uconnect 5 inalámbrico',
@@ -145,12 +159,16 @@ export const VEHICLES = [
     badge: 'Luxury 4x4',
     shortDescription:
       'El SUV más premiado de la historia en su versión Limited 2026: lujo superior, sistema de gestión de tracción Selec-Terrain y confort ejecutivo en cada ruta.',
+    heroImage: '/images/vehicles/GrandCherokee2026/GrandOut1.webp',
     images: [
-      '/images/vehicles/grandcherokee-hero.jpg',
-      '/images/vehicles/grandcherokee-ext-2.jpg',
-      '/images/vehicles/grandcherokee-ext-3.jpg',
-      '/images/vehicles/grandcherokee-int-1.jpg',
-      '/images/vehicles/grandcherokee-int-2.jpg',
+      '/images/vehicles/GrandCherokee2026/GrandMidSide.webp',
+      '/images/vehicles/GrandCherokee2026/GrandOut1.webp',
+      '/images/vehicles/GrandCherokee2026/GrandOut2.webp',
+      '/images/vehicles/GrandCherokee2026/GrandFront.webp',
+      '/images/vehicles/GrandCherokee2026/GrandSide.webp',
+      '/images/vehicles/GrandCherokee2026/GrandBack.webp',
+      '/images/vehicles/GrandCherokee2026/GrandInside1.webp',
+      '/images/vehicles/GrandCherokee2026/GrandInside2.webp',
     ],
     features: [
       'Motor 3.6L Pentastar V6 de 293 HP con transmisión automática de 8 velocidades',
@@ -187,11 +205,15 @@ export const VEHICLES = [
     badge: 'Automática y Sincrónica',
     shortDescription:
       'Disponible tanto en transmisión Automática como Sincrónica en nuestra sede de Maracaibo: doble cabina para 5 pasajeros, bloqueo diferencial TC+ y gran capacidad de trabajo.',
+    heroImage: '/images/vehicles/RAM700/Ram700Out1.webp',
     images: [
-      '/images/vehicles/ram700-rojo.png',
-      '/images/vehicles/ram700-gris.png',
-      '/images/vehicles/ram700-ext-2.jpg',
-      '/images/vehicles/ram700-interior.png',
+      '/images/vehicles/RAM700/Ram700Front.webp',
+      '/images/vehicles/RAM700/Ram700Out1.webp',
+      '/images/vehicles/RAM700/Ram700Out2.webp',
+      '/images/vehicles/RAM700/Ram700Side.webp',
+      '/images/vehicles/RAM700/Ram700Back.webp',
+      '/images/vehicles/RAM700/Ram700Inside1.webp',
+      '/images/vehicles/RAM700/Ram700Inside2.webp',
     ],
     features: [
       'Ambas versiones en stock: Transmisión Automática CVT con modo Sport y Sincrónica de 5 velocidades',
@@ -228,10 +250,15 @@ export const VEHICLES = [
     badge: 'Especial Flotas',
     shortDescription:
       'La aliada ideal para empresas, comercios y sector agroindustrial en el Zulia: máxima resistencia estructural, bajo costo operativo y suspensión trasera reforzada.',
+    heroImage: '/images/vehicles/RAM700SLT/Ram700SLTOut2.webp',
     images: [
-      '/images/vehicles/ram700-hero.jpg',
-      '/images/vehicles/ram700-gris.png',
-      '/images/vehicles/ram700-ext-2.jpg',
+      '/images/vehicles/RAM700SLT/Ram700SLTFront.webp',
+      '/images/vehicles/RAM700SLT/Ram700SLTOut2.webp',
+      '/images/vehicles/RAM700SLT/Ram700SLTOut1.webp',
+      '/images/vehicles/RAM700SLT/Ram700SLTSide.webp',
+      '/images/vehicles/RAM700SLT/Ram700SLTBack.webp',
+      '/images/vehicles/RAM700SLT/Ram700SLTInside1.webp',
+      '/images/vehicles/RAM700SLT/Ram700SLTInside2.webp',
     ],
     features: [
       'Suspensión trasera de eje rígido con muelles parabólicos de alta resistencia',
@@ -268,12 +295,15 @@ export const VEHICLES = [
     badge: 'Hurricane 420 HP',
     shortDescription:
       'Fuerza y prestigio sin rivales: la nueva RAM 1500 Lone Star 4x4 con motor 3.0L Hurricane Twin-Turbo de 420 HP ya se encuentra en exhibición en nuestro Showroom de Maracaibo.',
+    heroImage: '/images/vehicles/RAM1500/Ram1500Out2.webp',
     images: [
-      '/images/vehicles/ram1500-hurricane.jpg',
-      '/images/vehicles/ram1500-lonestar.jpg',
-      '/images/vehicles/ram1500-cabina.jpg',
-      '/images/vehicles/ram1500-asiento.jpg',
-      '/images/vehicles/ram1500-4x4.jpg',
+      '/images/vehicles/RAM1500/Ram1500Front.webp',
+      '/images/vehicles/RAM1500/Ram1500Out2.webp',
+      '/images/vehicles/RAM1500/Ram1500Out1.webp',
+      '/images/vehicles/RAM1500/Ram1500Side.webp',
+      '/images/vehicles/RAM1500/Ram1500Back.webp',
+      '/images/vehicles/RAM1500/Ram1500Inside1.webp',
+      '/images/vehicles/RAM1500/Ram1500Inside2.webp',
     ],
     features: [
       'Nuevo motor 3.0L Hurricane Twin-Turbo de 6 cilindros en línea con 420 HP',
@@ -292,7 +322,7 @@ export const VEHICLES = [
   },
 ];
 
-export const BRANDS = ['Todas', 'Jeep', 'RAM'];
+export const BRANDS = ['Todas', 'Jeep', 'Dodge', 'RAM'];
 
 export const CATEGORIES = [
   'Todas',

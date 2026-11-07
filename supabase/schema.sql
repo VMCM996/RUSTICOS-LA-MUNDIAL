@@ -1,5 +1,5 @@
 -- ============================================================================
--- ESQUEMA SUPABASE PARA RÚSTICOS MOTORS (MARACAIBO — JEEP | DODGE | RAM)
+-- ESQUEMA SUPABASE PARA RÚSTICOS LA MUNDIAL, C.A. (MARACAIBO — JEEP | DODGE | RAM)
 -- Instrucciones: Copia y pega este script en el "SQL Editor" de tu proyecto
 -- en Supabase (https://supabase.com/dashboard) y presiona "Run".
 -- ============================================================================
@@ -67,6 +67,21 @@ CREATE TABLE IF NOT EXISTS public.leads (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
+-- Trigger automático para mantener updated_at al día en public.vehicles
+CREATE OR REPLACE FUNCTION public.handle_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS set_vehicles_updated_at ON public.vehicles;
+CREATE TRIGGER set_vehicles_updated_at
+  BEFORE UPDATE ON public.vehicles
+  FOR EACH ROW
+  EXECUTE FUNCTION public.handle_updated_at();
+
 -- ============================================================================
 -- SEGURIDAD: ROW LEVEL SECURITY (RLS)
 -- ============================================================================
@@ -82,8 +97,8 @@ CREATE POLICY "Lectura publica de vehiculos publicados"
 CREATE POLICY "Administradores gestionan vehiculos"
   ON public.vehicles FOR ALL
   TO authenticated
-  USING (true)
-  WITH CHECK (true);
+  USING ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin' OR auth.role() = 'service_role')
+  WITH CHECK ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin' OR auth.role() = 'service_role');
 
 CREATE POLICY "Lectura publica de eventos publicados"
   ON public.events FOR SELECT
@@ -92,26 +107,26 @@ CREATE POLICY "Lectura publica de eventos publicados"
 CREATE POLICY "Administradores gestionan eventos"
   ON public.events FOR ALL
   TO authenticated
-  USING (true)
-  WITH CHECK (true);
+  USING ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin' OR auth.role() = 'service_role')
+  WITH CHECK ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin' OR auth.role() = 'service_role');
 
 -- Políticas para Leads: Inserción desde API / público, pero LECTURA BLOQUEADA al público
--- (Solo usuarios autenticados del concesionario pueden ver los leads)
+-- (Solo administradores autenticados del concesionario o service_role pueden ver/editar leads)
 CREATE POLICY "Insercion publica de leads"
   ON public.leads FOR INSERT
   TO anon, authenticated
   WITH CHECK (true);
 
-CREATE POLICY "Solo administradores leen y actualizan leads"
+CREATE POLICY "Solo administradores leen leads"
   ON public.leads FOR SELECT
   TO authenticated
-  USING (true);
+  USING ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin' OR auth.role() = 'service_role');
 
 CREATE POLICY "Solo administradores editan leads"
   ON public.leads FOR UPDATE
   TO authenticated
-  USING (true)
-  WITH CHECK (true);
+  USING ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin' OR auth.role() = 'service_role')
+  WITH CHECK ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin' OR auth.role() = 'service_role');
 
 -- ============================================================================
 -- SUPABASE STORAGE: BUCKETS PARA IMÁGENES Y VIDEOS CORTOS
@@ -143,6 +158,16 @@ CREATE POLICY "Solo autenticados suben a vehicles-media"
   TO authenticated
   WITH CHECK (bucket_id = 'vehicles-media');
 
+CREATE POLICY "Solo autenticados actualizan en vehicles-media"
+  ON storage.objects FOR UPDATE
+  TO authenticated
+  USING (bucket_id = 'vehicles-media');
+
+CREATE POLICY "Solo autenticados borran en vehicles-media"
+  ON storage.objects FOR DELETE
+  TO authenticated
+  USING (bucket_id = 'vehicles-media');
+
 CREATE POLICY "Acceso publico de lectura a events-media"
   ON storage.objects FOR SELECT
   USING (bucket_id = 'events-media');
@@ -151,3 +176,13 @@ CREATE POLICY "Solo autenticados suben a events-media"
   ON storage.objects FOR INSERT
   TO authenticated
   WITH CHECK (bucket_id = 'events-media');
+
+CREATE POLICY "Solo autenticados actualizan en events-media"
+  ON storage.objects FOR UPDATE
+  TO authenticated
+  USING (bucket_id = 'events-media');
+
+CREATE POLICY "Solo autenticados borran en events-media"
+  ON storage.objects FOR DELETE
+  TO authenticated
+  USING (bucket_id = 'events-media');

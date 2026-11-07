@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 export default function Hero({ vehicles, onInspectVehicle }) {
   const leftHero =
     vehicles.find((v) => v.id === 'jeep-renegade-sahara-2027') || vehicles[0];
@@ -30,6 +32,8 @@ export default function Hero({ vehicles, onInspectVehicle }) {
         <h1 className="hero-trinity-title">
           <span className="trinity-jeep">JEEP</span>
           <span className="trinity-slash">/</span>
+          <span className="trinity-dodge">DODGE</span>
+          <span className="trinity-slash">/</span>
           <span className="trinity-ram">RAM</span>
         </h1>
 
@@ -38,8 +42,8 @@ export default function Hero({ vehicles, onInspectVehicle }) {
         </p>
 
         <p className="hero-lead">
-          En Rústicos La Mundial unimos la libertad todoterreno de Jeep y la fuerza
-          imparable de RAM para brindarte respaldo oficial en Maracaibo.
+          En Rústicos La Mundial unimos la libertad todoterreno de Jeep, el carácter de
+          Dodge y la fuerza imparable de RAM para brindarte respaldo oficial en Maracaibo.
         </p>
 
         <div className="hero-cta-wrap">
@@ -64,13 +68,12 @@ export default function Hero({ vehicles, onInspectVehicle }) {
           aria-label={`Ver detalles de ${leftHero.brand} ${leftHero.model}`}
         >
           <div className="trio-vehicle-frame">
-            <img
-              src={leftHero.images[0]}
+            <Image
+              src={leftHero.heroImage || leftHero.images[0]}
               alt={`${leftHero.brand} ${leftHero.model} en exhibición en Maracaibo`}
-              width="420"
-              height="235"
-              fetchPriority="high"
-              decoding="async"
+              fill
+              priority
+              sizes="(max-width: 860px) 100vw, 33vw"
             />
           </div>
           <div className="trio-caption">
@@ -89,13 +92,12 @@ export default function Hero({ vehicles, onInspectVehicle }) {
           aria-label={`Ver detalles de ${centerHero.brand} ${centerHero.model}`}
         >
           <div className="trio-vehicle-frame">
-            <img
-              src={centerHero.images[0]}
+            <Image
+              src={centerHero.heroImage || centerHero.images[0]}
               alt={`${centerHero.brand} ${centerHero.model} disponible en Maracaibo`}
-              width="450"
-              height="235"
-              fetchPriority="high"
-              decoding="async"
+              fill
+              priority
+              sizes="(max-width: 860px) 100vw, 36vw"
             />
           </div>
           <div className="trio-caption">
@@ -114,13 +116,12 @@ export default function Hero({ vehicles, onInspectVehicle }) {
           aria-label={`Ver detalles de ${rightHero.brand} ${rightHero.model}`}
         >
           <div className="trio-vehicle-frame">
-            <img
-              src={rightHero.images[0]}
+            <Image
+              src={rightHero.heroImage || rightHero.images[0]}
               alt={`Camioneta Pick-up ${rightHero.brand} ${rightHero.model} en Maracaibo`}
-              width="420"
-              height="235"
-              fetchPriority="high"
-              decoding="async"
+              fill
+              priority
+              sizes="(max-width: 860px) 100vw, 33vw"
             />
           </div>
           <div className="trio-caption">

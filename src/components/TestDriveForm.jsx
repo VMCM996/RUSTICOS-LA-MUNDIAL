@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { trackGAEvent } from './GoogleAnalytics';
 
@@ -55,10 +56,17 @@ export default function TestDriveForm({
 
   useEffect(() => {
     if (prefilledNote) {
+      const noteText =
+        typeof prefilledNote === 'object' ? prefilledNote.note : prefilledNote;
+      const nextRequestType =
+        typeof prefilledNote === 'object' && prefilledNote.requestType
+          ? prefilledNote.requestType
+          : 'Cotización y Financiamiento';
+
       setFormData((prev) => ({
         ...prev,
-        requestType: 'Cotización y Financiamiento',
-        comments: prefilledNote,
+        requestType: nextRequestType,
+        comments: noteText || prev.comments,
       }));
     }
   }, [prefilledNote]);
@@ -136,7 +144,7 @@ export default function TestDriveForm({
         : 'Vehículo seleccionado';
 
       const waMessage = encodeURIComponent(
-        `Hola equipo de Rústicos Motors Maracaibo, acabo de registrar la solicitud *${data.leadId}*:\n` +
+        `Hola equipo de Rústicos La Mundial Maracaibo, acabo de registrar la solicitud *${data.leadId}*:\n` +
           `• Nombre: ${formData.fullName}\n` +
           `• Solicitud: ${formData.requestType}\n` +
           `• Vehículo: ${vehicleTitle}\n` +
@@ -165,7 +173,7 @@ export default function TestDriveForm({
           <span className="section-eyebrow">Atención Oficial en Venezuela</span>
           <h2 className="section-title">Agenda tu Test Drive o Solicita Cotización</h2>
           <p className="section-subtitle">
-            Pon a prueba la potencia de nuestras unidades Jeep y RAM o solicita
+            Pon a prueba la potencia de nuestras unidades Jeep, Dodge y RAM o solicita
             asesoría personalizada de financiamiento en nuestra sede de Maracaibo.
           </p>
         </div>
@@ -174,24 +182,21 @@ export default function TestDriveForm({
           <div className="info-card">
             <div
               style={{
+                position: 'relative',
+                height: '220px',
                 borderRadius: '10px',
                 overflow: 'hidden',
                 border: '1px solid rgba(255,255,255,0.12)',
               }}
             >
-              <img
+              <Image
                 src="/images/showroom/fachada-test-drive.jpg"
                 alt="Unidad Test Drive frente a Rústicos La Mundial Maracaibo"
-                width="480"
-                height="260"
-                loading="lazy"
-                decoding="async"
+                fill
+                sizes="(max-width: 1080px) 100vw, 480px"
                 style={{
-                  width: '100%',
-                  height: '220px',
                   objectFit: 'cover',
                   objectPosition: 'center 65%',
-                  display: 'block',
                 }}
               />
             </div>

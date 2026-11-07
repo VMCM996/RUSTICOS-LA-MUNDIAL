@@ -3,7 +3,7 @@ const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '584125554440
 export default function WhatsAppFloat() {
   return (
     <a
-      href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20les%20escribo%20desde%20la%20web%20de%20R%C3%BAsticos%20Motors%20Maracaibo.%20Deseo%20informaci%C3%B3n%20sobre%20un%20veh%C3%ADculo.`}
+      href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20les%20escribo%20desde%20la%20web%20de%20R%C3%BAsticos%20La%20Mundial%20Maracaibo.%20Deseo%20informaci%C3%B3n%20sobre%20un%20veh%C3%ADculo.`}
       target="_blank"
       rel="noopener noreferrer"
       className="wa-float-btn"

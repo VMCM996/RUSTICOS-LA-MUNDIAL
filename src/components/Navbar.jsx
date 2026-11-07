@@ -1,24 +1,37 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import BrandLogo from './BrandLogo';
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '584125554440';
 
 export default function Navbar({ onSelectBrandFilter }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState('#inicio');
 
   const handleBrandClick = (brand) => {
     if (onSelectBrandFilter) {
       onSelectBrandFilter(brand);
     }
+    setActiveNav('#catalogo');
     const el = document.getElementById('catalogo');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleReloadPage = (e) => {
+  const handleLogoClick = (e) => {
     e.preventDefault();
-    window.location.reload();
+    if (onSelectBrandFilter) {
+      onSelectBrandFilter('Todas');
+    }
+    setActiveNav('#inicio');
+    setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavClick = (hash) => {
+    setActiveNav(hash);
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -26,20 +39,21 @@ export default function Navbar({ onSelectBrandFilter }) {
       {/* Top Tier Bar */}
       <div className="header-top">
         <div className="container header-top-inner">
-          {/* Left: Logo Oficial Rústicos La Mundial (Recarga la página) + Ubicación */}
+          {/* Left: Logo Oficial Rústicos La Mundial + Ubicación */}
           <div className="header-left-group">
             <a
-              href="/"
-              onClick={handleReloadPage}
+              href="#inicio"
+              onClick={handleLogoClick}
               className="rusticos-navbar-logo-link"
-              title="Rústicos La Mundial — Recargar página"
-              aria-label="Rústicos La Mundial — Recargar página de inicio"
+              title="Rústicos La Mundial — Ir al inicio"
+              aria-label="Rústicos La Mundial — Ir al inicio"
             >
-              <img
+              <Image
                 src="/images/logos/rusticos-la-mundial.svg"
                 alt="Logo Oficial Rústicos La Mundial"
-                width="148"
-                height="48"
+                width={148}
+                height={48}
+                priority
                 className="rusticos-navbar-logo-img"
               />
             </a>
@@ -99,7 +113,7 @@ export default function Navbar({ onSelectBrandFilter }) {
           {/* Right: WhatsApp + Mobile Menu */}
           <div className="header-actions">
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20deseo%20consultar%20sobre%20los%20modelos%20Jeep%20y%20RAM%20disponibles%20en%20Maracaibo`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20deseo%20consultar%20sobre%20los%20modelos%20Jeep,%20Dodge%20y%20RAM%20disponibles%20en%20Maracaibo`}
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-header-cta"
@@ -150,39 +164,63 @@ export default function Navbar({ onSelectBrandFilter }) {
             <li>
               <a
                 href="#inicio"
-                className="active"
-                onClick={() => setMobileMenuOpen(false)}
+                className={activeNav === '#inicio' ? 'active' : ''}
+                onClick={() => handleNavClick('#inicio')}
               >
                 Inicio
               </a>
             </li>
             <li>
-              <a href="#catalogo" onClick={() => setMobileMenuOpen(false)}>
+              <a
+                href="#catalogo"
+                className={activeNav === '#catalogo' ? 'active' : ''}
+                onClick={() => handleNavClick('#catalogo')}
+              >
                 Vehículos
               </a>
             </li>
             <li>
-              <a href="#promociones" onClick={() => setMobileMenuOpen(false)}>
+              <a
+                href="#promociones"
+                className={activeNav === '#promociones' ? 'active' : ''}
+                onClick={() => handleNavClick('#promociones')}
+              >
                 Promociones
               </a>
             </li>
             <li>
-              <a href="#eventos" onClick={() => setMobileMenuOpen(false)}>
+              <a
+                href="#eventos"
+                className={activeNav === '#eventos' ? 'active' : ''}
+                onClick={() => handleNavClick('#eventos')}
+              >
                 Eventos
               </a>
             </li>
             <li>
-              <a href="#financiamiento" onClick={() => setMobileMenuOpen(false)}>
+              <a
+                href="#financiamiento"
+                className={activeNav === '#financiamiento' ? 'active' : ''}
+                onClick={() => handleNavClick('#financiamiento')}
+              >
                 Financiamiento
               </a>
             </li>
             <li>
-              <a href="#ubicacion" onClick={() => setMobileMenuOpen(false)}>
+              <a
+                href="#ubicacion"
+                className={activeNav === '#ubicacion' ? 'active' : ''}
+                onClick={() => handleNavClick('#ubicacion')}
+              >
                 Ubicación (Mapa)
               </a>
             </li>
             <li>
-              <a href="#test-drive" onClick={() => setMobileMenuOpen(false)}>
+              <a
+                href="#test-drive"
+                className={activeNav === '#test-drive' ? 'active' : ''}
+                onClick={() => handleNavClick('#test-drive')}
+              >
                 Contacto
               </a>
             </li>

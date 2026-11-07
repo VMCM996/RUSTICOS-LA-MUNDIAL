@@ -1,6 +1,6 @@
-# Rústicos Motors — Concesionario Oficial Jeep | Dodge | RAM
+# Rústicos La Mundial, C.A. — Concesionario Oficial Jeep | Dodge | RAM (Maracaibo)
 
-Portal web desarrollado con **Next.js (App Router)**, **React 18** y **CSS Moderno Nativo** (Variables CSS, CSS Grid, Flexbox, `clamp()` y diseño responsivo sin dependencias de frameworks CSS externos).
+Portal web desarrollado con **Next.js (App Router)**, **React 19** y **CSS Moderno Nativo** (Variables CSS, CSS Grid, Flexbox, `clamp()` y diseño responsivo sin dependencias de frameworks CSS externos).
 
 ## Características Principales
 

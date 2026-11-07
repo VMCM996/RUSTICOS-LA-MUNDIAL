@@ -2,9 +2,9 @@ import Link from 'next/link';
 import BrandLogo from '@/components/BrandLogo';
 
 export const metadata = {
-  title: 'Términos y Condiciones | Concesionario Jeep • Dodge • RAM Venezuela',
+  title: 'Términos y Condiciones | Rústicos La Mundial Jeep • Dodge • RAM Maracaibo',
   description:
-    'Términos de uso del portal web, condiciones de precios referenciales, simulador de financiamiento y agendamiento de citas.',
+    'Términos de uso del portal web de Rústicos La Mundial, C.A., condiciones de precios referenciales, solicitud de financiamiento y agendamiento de citas.',
 };
 
 export default function TerminosPage() {

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { EVENTS, EVENT_CATEGORIES } from '@/data/events';
 
 function getYouTubeEmbedUrl(url) {
@@ -16,6 +17,8 @@ export default function EventsSection() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [activeMediaTab, setActiveMediaTab] = useState('video'); // 'video' | 'photos'
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
+  const modalRef = useRef(null);
+  const closeBtnRef = useRef(null);
 
   const filteredEvents = EVENTS.filter((ev) => {
     if (activeFilter === 'Todos') return true;
@@ -25,18 +28,42 @@ export default function EventsSection() {
 
   useEffect(() => {
     if (!selectedEvent) return undefined;
+    const previouslyFocused = document.activeElement;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+
+    requestAnimationFrame(() => {
+      closeBtnRef.current?.focus();
+    });
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         setSelectedEvent(null);
+        return;
+      }
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       document.body.style.overflow = prevOverflow;
       window.removeEventListener('keydown', handleKeyDown);
+      if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
+        previouslyFocused.focus();
+      }
     };
   }, [selectedEvent]);
 
@@ -93,13 +120,11 @@ export default function EventsSection() {
                 }}
                 aria-label={`Ver video y galería de ${eventItem.title}`}
               >
-                <img
+                <Image
                   src={eventItem.coverImage}
                   alt={eventItem.title}
-                  width="420"
-                  height="240"
-                  loading="lazy"
-                  decoding="async"
+                  fill
+                  sizes="(max-width: 860px) 100vw, 33vw"
                 />
                 <div className="event-media-overlay">
                   <span className="event-category-badge">{eventItem.category}</span>
@@ -169,6 +194,7 @@ export default function EventsSection() {
           onClick={() => setSelectedEvent(null)}
         >
           <div
+            ref={modalRef}
             className="modal-content event-modal-content"
             onClick={(e) => e.stopPropagation()}
           >
@@ -183,6 +209,7 @@ export default function EventsSection() {
               </div>
 
               <button
+                ref={closeBtnRef}
                 type="button"
                 className="btn btn-outline"
                 onClick={() => setSelectedEvent(null)}
@@ -241,12 +268,11 @@ export default function EventsSection() {
                 ) : (
                   <div>
                     <div className="gallery-main">
-                      <img
+                      <Image
                         src={selectedEvent.gallery[activePhotoIndex]}
                         alt={`${selectedEvent.title} - foto ${activePhotoIndex + 1}`}
-                        width="640"
-                        height="360"
-                        decoding="async"
+                        fill
+                        sizes="(max-width: 1080px) 100vw, 640px"
                       />
                     </div>
                     <div className="gallery-thumbs">
@@ -257,13 +283,11 @@ export default function EventsSection() {
                           className={`thumb-btn ${activePhotoIndex === idx ? 'active' : ''}`}
                           onClick={() => setActivePhotoIndex(idx)}
                         >
-                          <img
+                          <Image
                             src={imgUrl}
                             alt={`Miniatura ${idx + 1}`}
-                            width="160"
-                            height="72"
-                            loading="lazy"
-                            decoding="async"
+                            fill
+                            sizes="160px"
                           />
                         </button>
                       ))}

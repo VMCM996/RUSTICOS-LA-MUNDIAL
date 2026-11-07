@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import BrandLogo from './BrandLogo';
 
 const LINEUP_BRANDS = [
@@ -7,14 +8,21 @@ const LINEUP_BRANDS = [
     brand: 'Jeep',
     tagline: 'LIBERTAD EN CADA RUTA',
     altText: 'Jeep Renegade, Compass y Grand Cherokee en Maracaibo',
-    image: '/images/vehicles/renegade-hero.jpg',
+    image: '/images/vehicles/Sahara2027/SaharaOut1.webp',
     btnClass: 'btn-lineup-jeep',
+  },
+  {
+    brand: 'Dodge',
+    tagline: 'ACTITUD SIN LÍMITES',
+    altText: 'Showroom Oficial Dodge en Rústicos La Mundial Maracaibo',
+    image: '/images/showroom/sede-la-mundial.jpg',
+    btnClass: 'btn-lineup-dark',
   },
   {
     brand: 'RAM',
     tagline: 'FUERZA QUE TRABAJA CONTIGO',
     altText: 'Camioneta Pick-up RAM 700 y RAM 1500 Lone Star en Maracaibo',
-    image: '/images/vehicles/ram700-hero.jpg',
+    image: '/images/vehicles/RAM1500/Ram1500Out2.webp',
     btnClass: 'btn-lineup-dark',
   },
 ];
@@ -42,7 +50,8 @@ export default function BrandLineup({ onSelectBrand }) {
           </div>
 
           <p className="lineup-description">
-            Desde la aventura sin límites hasta la fuerza del trabajo pesado.{' '}
+            Desde la aventura sin límites hasta la fuerza del trabajo pesado, pasando por el
+            carácter deportivo en cada camino.{' '}
             <strong>Aquí tienes todo lo que necesitas en Maracaibo.</strong>
           </p>
         </div>
@@ -56,13 +65,11 @@ export default function BrandLineup({ onSelectBrand }) {
               <p className="lineup-tagline">{item.tagline}</p>
 
               <div className="lineup-photo">
-                <img
+                <Image
                   src={item.image}
                   alt={item.altText}
-                  width="380"
-                  height="195"
-                  loading="lazy"
-                  decoding="async"
+                  fill
+                  sizes="(max-width: 860px) 100vw, 33vw"
                 />
               </div>
 

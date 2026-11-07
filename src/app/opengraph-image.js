@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'Rústicos La Mundial — Concesionario Oficial Jeep | RAM en Maracaibo';
+export const alt = 'Rústicos La Mundial — Concesionario Oficial Jeep | Dodge | RAM en Maracaibo';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -43,6 +43,8 @@ export default async function Image() {
           }}
         >
           <span style={{ color: '#6b8e23' }}>JEEP</span>
+          <span style={{ color: '#8a929a' }}>/</span>
+          <span style={{ color: '#dc2626' }}>DODGE</span>
           <span style={{ color: '#8a929a' }}>/</span>
           <span style={{ color: '#f3f4f6' }}>RAM</span>
         </div>

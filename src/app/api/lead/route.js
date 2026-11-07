@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { VEHICLES } from '@/data/vehicles';
+import { insertLeadToSupabase } from '@/lib/supabase';
 
 // Control de Rate-Limiting en memoria con limpieza automática y límite de entradas
 const rateLimitMap = new Map();
@@ -14,9 +15,28 @@ const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 const ALLOWED_REQUEST_TYPES = new Set([
   'Test Drive Presencial',
   'Cotización y Financiamiento',
+  'Servicio Técnico / Repuestos Mopar',
   'Retoma de Vehículo',
 ]);
 const ALLOWED_VEHICLE_IDS = new Set(VEHICLES.map((v) => v.id));
+
+function isValidFutureOrTodayDate(dateStr) {
+  if (!DATE_REGEX.test(dateStr)) return false;
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const parsed = new Date(Date.UTC(year, month - 1, day));
+  if (
+    parsed.getUTCFullYear() !== year ||
+    parsed.getUTCMonth() !== month - 1 ||
+    parsed.getUTCDate() !== day
+  ) {
+    return false;
+  }
+
+  // Permitimos desde la fecha actual en huso horario de Venezuela (UTC-4)
+  const nowVe = new Date(Date.now() - 4 * 60 * 60 * 1000);
+  const todayVeStr = nowVe.toISOString().split('T')[0];
+  return dateStr >= todayVeStr;
+}
 
 function cleanupExpiredRateLimits(now) {
   for (const [key, val] of rateLimitMap.entries()) {
@@ -24,9 +44,10 @@ function cleanupExpiredRateLimits(now) {
       rateLimitMap.delete(key);
     }
   }
-  if (rateLimitMap.size >= MAX_TRACKED_IPS) {
+  while (rateLimitMap.size >= MAX_TRACKED_IPS) {
     const oldestKey = rateLimitMap.keys().next().value;
-    if (oldestKey) rateLimitMap.delete(oldestKey);
+    if (!oldestKey) break;
+    rateLimitMap.delete(oldestKey);
   }
 }
 
@@ -119,9 +140,12 @@ export async function POST(request) {
       );
     }
 
-    if (!DATE_REGEX.test(cleanDate) || Number.isNaN(Date.parse(cleanDate))) {
+    if (!isValidFutureOrTodayDate(cleanDate)) {
       return NextResponse.json(
-        { ok: false, error: 'Selecciona una fecha preferida válida para tu cita.' },
+        {
+          ok: false,
+          error: 'Selecciona una fecha preferida válida (hoy o posterior) para tu cita.',
+        },
         { status: 400 }
       );
     }
@@ -142,21 +166,41 @@ export async function POST(request) {
     const safeRequestType = ALLOWED_REQUEST_TYPES.has(requestType)
       ? requestType
       : 'Test Drive Presencial';
+    const cleanComments = String(comments || '').trim().slice(0, 500);
+    const leadId = `LEAD-${now.toString(36).toUpperCase()}`;
 
-    // Uso seguro de variables privadas de servidor (sin exponerlas al navegador)
+    // Persistencia en Supabase (con fallback seguro si aún no está configurado)
+    let supabaseResult = { persisted: false };
+    try {
+      supabaseResult = await insertLeadToSupabase({
+        lead_code: leadId,
+        full_name: cleanName,
+        phone: cleanPhone,
+        email: cleanEmail,
+        vehicle_id: safeVehicleId,
+        request_type: safeRequestType,
+        preferred_date: cleanDate,
+        comments: cleanComments || null,
+        client_ip: ip,
+      });
+    } catch {
+      supabaseResult = { persisted: false, reason: 'network_error' };
+    }
+
     const hasCrmSecret = Boolean(process.env.CRM_WEBHOOK_SECRET_KEY);
 
     return NextResponse.json(
       {
         ok: true,
-        leadId: `LEAD-${now.toString(36).toUpperCase()}`,
+        leadId,
+        persisted: supabaseResult.persisted,
         crmConnected: hasCrmSecret,
         summary: {
           fullName: cleanName,
           vehicleId: safeVehicleId,
           requestType: safeRequestType,
           preferredDate: cleanDate,
-          comments: String(comments || '').slice(0, 500),
+          comments: cleanComments,
         },
       },
       { status: 200 }

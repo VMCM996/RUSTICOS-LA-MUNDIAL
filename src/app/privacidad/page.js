@@ -2,9 +2,9 @@ import Link from 'next/link';
 import BrandLogo from '@/components/BrandLogo';
 
 export const metadata = {
-  title: 'Política de Privacidad | Concesionario Jeep • Dodge • RAM Venezuela',
+  title: 'Política de Privacidad | Rústicos La Mundial Jeep • Dodge • RAM Maracaibo',
   description:
-    'Conoce cómo protegemos y tratamos tus datos personales en las solicitudes de cotización, financiamiento y pruebas de manejo (Test Drive).',
+    'Conoce cómo protegemos y tratamos tus datos personales en las solicitudes de cotización, financiamiento y pruebas de manejo (Test Drive) en Rústicos La Mundial, C.A.',
 };
 
 export default function PrivacidadPage() {
@@ -26,8 +26,8 @@ export default function PrivacidadPage() {
           <section>
             <h2>1. Responsable del Tratamiento</h2>
             <p>
-              <strong>Rústicos Motors C.A. (Concesionario Oficial Jeep | Dodge | RAM)</strong>, con
-              domicilio principal y sede única en <strong>Maracaibo, Estado Zulia, Venezuela</strong>,
+              <strong>Rústicos La Mundial, C.A. (RIF: J-50777406-4 — Concesionario Oficial Jeep | Dodge | RAM)</strong>,
+              con domicilio principal y sede única en la <strong>Calle 72, local comercial 12-38, sector Tierra Negra, Maracaibo, Estado Zulia, Venezuela</strong>,
               es responsable del tratamiento de los datos personales recopilados a través de este
               portal web.
             </p>

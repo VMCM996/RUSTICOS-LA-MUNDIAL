@@ -8,9 +8,11 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container">
         <div className="footer-top-bar">
-          {/* Left: Brand Logos (Jeep | RAM) */}
+          {/* Left: Brand Logos (Jeep | Dodge | RAM) */}
           <div className="footer-brands">
             <BrandLogo brand="Jeep" variant="light" size="md" />
+            <span className="footer-divider" aria-hidden="true" />
+            <BrandLogo brand="Dodge" variant="light" size="md" />
             <span className="footer-divider" aria-hidden="true" />
             <BrandLogo brand="RAM" variant="light" size="md" />
           </div>
@@ -34,7 +36,7 @@ export default function Footer() {
             </a>
 
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20deseo%20informaci%C3%B3n%20sobre%20el%20inventario%20Jeep%20y%20RAM%20en%20Maracaibo`}
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20deseo%20informaci%C3%B3n%20sobre%20el%20inventario%20Jeep,%20Dodge%20y%20RAM%20en%20Maracaibo`}
               target="_blank"
               rel="noopener noreferrer"
               className="footer-meta-item footer-wa-link"
@@ -117,7 +119,7 @@ export default function Footer() {
 
         <div className="footer-bottom-bar">
           <span>
-            © 2026 Rústicos La Mundial, C.A. (RIF: J-50777406-4) — Concesionario Oficial Jeep | RAM en Maracaibo.
+            © 2026 Rústicos La Mundial, C.A. (RIF: J-50777406-4) — Concesionario Oficial Jeep | Dodge | RAM en Maracaibo.
           </span>
 
           <div className="footer-legal-links">

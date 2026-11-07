@@ -1,35 +1,21 @@
-import { Outfit, Inter } from 'next/font/google';
 import './globals.css';
 import CookieBanner from '@/components/CookieBanner';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
-
-const outfit = Outfit({
-  subsets: ['latin'],
-  variable: '--font-heading',
-  weight: ['600', '700', '800', '900'],
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
-});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://rusticosmotors.com';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Rústicos La Mundial — Concesionario Oficial Jeep | RAM en Maracaibo',
-    template: '%s | Rústicos La Mundial Jeep • RAM Maracaibo',
+    default: 'Rústicos La Mundial — Concesionario Oficial Jeep | Dodge | RAM en Maracaibo',
+    template: '%s | Rústicos La Mundial Jeep • Dodge • RAM Maracaibo',
   },
   description:
-    'Concesionario oficial Jeep y RAM en Maracaibo, Estado Zulia. Estamos ubicados en la Calle 72, local comercial 12-38, sector Tierra Negra. Conoce Jeep Renegade, Compass, Grand Cherokee, RAM 700 y RAM 1500 Lone Star.',
+    'Concesionario oficial Jeep, Dodge y RAM en Maracaibo, Estado Zulia. Estamos ubicados en la Calle 72, local comercial 12-38, sector Tierra Negra. Conoce Jeep Renegade, Compass, Grand Cherokee, Dodge, RAM 700 y RAM 1500 Lone Star.',
   keywords: [
     'Concesionario Jeep Maracaibo',
+    'Dodge Maracaibo',
     'RAM Maracaibo',
     'Rústicos La Mundial',
     'Jeep Renegade 2027 Venezuela',
@@ -44,16 +30,16 @@ export const metadata = {
     type: 'website',
     locale: 'es_VE',
     url: siteUrl,
-    siteName: 'Rústicos La Mundial Maracaibo — Jeep | RAM',
-    title: 'Aventura y Fuerza en un Solo Lugar: Jeep | RAM en Maracaibo',
+    siteName: 'Rústicos La Mundial Maracaibo — Jeep | Dodge | RAM',
+    title: 'Aventura y Fuerza en un Solo Lugar: Jeep | Dodge | RAM en Maracaibo',
     description:
       'Capacidad 4x4, potencia y prestigio. Visítanos en Calle 72, local comercial 12-38, sector Tierra Negra, Maracaibo, Estado Zulia.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Rústicos La Mundial — Concesionario Oficial Jeep | RAM Maracaibo',
+    title: 'Rústicos La Mundial — Concesionario Oficial Jeep | Dodge | RAM Maracaibo',
     description:
-      'Explora los modelos disponibles Jeep Renegade, Compass, Grand Cherokee, RAM 700 y RAM 1500 Lone Star en Maracaibo, Estado Zulia.',
+      'Explora los modelos disponibles Jeep Renegade, Compass, Grand Cherokee, Dodge, RAM 700 y RAM 1500 Lone Star en Maracaibo, Estado Zulia.',
   },
   robots: {
     index: true,
@@ -64,7 +50,7 @@ export const metadata = {
 const jsonLdAutoDealer = {
   '@context': 'https://schema.org',
   '@type': 'AutoDealer',
-  name: 'Rústicos La Mundial — Concesionario Oficial Jeep | RAM Maracaibo',
+  name: 'Rústicos La Mundial — Concesionario Oficial Jeep | Dodge | RAM Maracaibo',
   legalName: 'Rústicos La Mundial, C.A.',
   taxID: 'J-50777406-4',
   image: `${siteUrl}/images/showroom/fachada-atardecer.jpg`,
@@ -96,14 +82,19 @@ const jsonLdAutoDealer = {
       closes: '14:00',
     },
   ],
-  brand: ['Jeep', 'RAM'],
+  brand: ['Jeep', 'Dodge', 'RAM'],
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={`${outfit.variable} ${inter.variable}`}>
+    <html lang="es">
       <head>
-        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdAutoDealer) }}
