@@ -1,10 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export', // Habilita la generación de HTML estático para GitHub Pages
   compress: true,
   poweredByHeader: false,
+  turbopack: {
+    root: import.meta.dirname,
+  },
   images: {
+    unoptimized: true, // Obligatorio para exportación estática
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 604800,
     remotePatterns: [
       {
         protocol: 'https',
@@ -16,40 +20,9 @@ const nextConfig = {
       },
     ],
   },
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload',
-          },
-          {
-            key: 'Content-Security-Policy',
-            value:
-              "upgrade-insecure-requests; frame-src 'self' https://maps.google.com https://www.google.com https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self';",
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(self)',
-          },
-        ],
-      },
-    ];
-  },
+  // Si tu web se publica en https://tu-usuario.github.io/RUSTICOS-LA-MUNDIAL
+  // descomenta la siguiente línea para que no se rompan las rutas de estilos e imágenes:
+  // basePath: '/RUSTICOS-LA-MUNDIAL',
 };
 
 export default nextConfig;
