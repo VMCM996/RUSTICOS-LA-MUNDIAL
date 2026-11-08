@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import BrandLogo from './BrandLogo';
+import { withBasePath } from '../lib/basePath';
 
 export default function PromoBanners({ onSelectPromoAction }) {
   const scrollTo = (id, presetNote, requestType) => {
@@ -19,7 +20,7 @@ export default function PromoBanners({ onSelectPromoAction }) {
         <article className="diagonal-panel panel-jeep">
           <div className="diagonal-panel-bg">
             <Image
-              src="/images/showroom/fachada-atardecer.jpg"
+              src={withBasePath('/images/showroom/fachada-atardecer.jpg')}
               alt="Plan de Financiamiento Directo en Rústicos La Mundial Maracaibo"
               fill
               sizes="(max-width: 860px) 100vw, 33vw"
@@ -52,7 +53,7 @@ export default function PromoBanners({ onSelectPromoAction }) {
         <article className="diagonal-panel panel-dodge">
           <div className="diagonal-panel-bg">
             <Image
-              src="/images/showroom/fachada-test-drive.jpg"
+              src={withBasePath('/images/showroom/fachada-test-drive.jpg')}
               alt="Unidad de Test Drive en Rústicos La Mundial Maracaibo"
               fill
               sizes="(max-width: 860px) 100vw, 33vw"
@@ -92,7 +93,7 @@ export default function PromoBanners({ onSelectPromoAction }) {
         <article className="diagonal-panel panel-ram">
           <div className="diagonal-panel-bg">
             <Image
-              src="/images/vehicles/RAM700/Ram700Out2.webp"
+              src={withBasePath('/images/vehicles/RAM700/Ram700Out2.webp')}
               alt="Camioneta RAM — Centro de Servicio Autorizado Mopar en Maracaibo"
               fill
               sizes="(max-width: 860px) 100vw, 33vw"

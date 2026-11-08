@@ -1,4 +1,6 @@
-export const VEHICLES = [
+import { withBasePath } from '../lib/basePath';
+
+const RAW_VEHICLES = [
   {
     id: 'jeep-renegade-sahara-2027',
     brand: 'Jeep',
@@ -321,6 +323,12 @@ export const VEHICLES = [
     },
   },
 ];
+
+export const VEHICLES = RAW_VEHICLES.map((vehicle) => ({
+  ...vehicle,
+  heroImage: withBasePath(vehicle.heroImage),
+  images: Array.isArray(vehicle.images) ? vehicle.images.map(withBasePath) : [],
+}));
 
 export const BRANDS = ['Todas', 'Jeep', 'Dodge', 'RAM'];
 

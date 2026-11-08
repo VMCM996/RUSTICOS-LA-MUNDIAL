@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { trackGAEvent } from './GoogleAnalytics';
+import { withBasePath } from '../lib/basePath';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_REGEX = /^[+\d][\d\s()-]{8,18}$/;
@@ -113,21 +114,30 @@ export default function TestDriveForm({
 
     setIsSubmitting(true);
     try {
-      const response = await fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          formLoadedAt,
-        }),
-      });
+      let leadId = `RLM-${Math.floor(100000 + Math.random() * 900000)}`;
 
-      const data = await response.json();
+      try {
+        const response = await fetch(withBasePath('/api/lead'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ...formData,
+            formLoadedAt,
+          }),
+        });
 
-      if (!response.ok || !data.ok) {
-        setServerError(data.error || 'No se pudo procesar tu solicitud.');
-        setIsSubmitting(false);
-        return;
+        const contentType = response.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          const data = await response.json();
+          if (!response.ok || !data.ok) {
+            setServerError(data.error || 'No se pudo procesar tu solicitud.');
+            setIsSubmitting(false);
+            return;
+          }
+          if (data.leadId) leadId = data.leadId;
+        }
+      } catch {
+        // En GitHub Pages (sitio estático sin servidor Node) continuamos con el código local y enlace directo a WhatsApp
       }
 
       const chosen = vehicles.find((v) => v.id === formData.vehicleId);
@@ -144,7 +154,7 @@ export default function TestDriveForm({
         : 'Vehículo seleccionado';
 
       const waMessage = encodeURIComponent(
-        `Hola equipo de Rústicos La Mundial Maracaibo, acabo de registrar la solicitud *${data.leadId}*:\n` +
+        `Hola equipo de Rústicos La Mundial Maracaibo, acabo de registrar la solicitud *${leadId}*:\n` +
           `• Nombre: ${formData.fullName}\n` +
           `• Solicitud: ${formData.requestType}\n` +
           `• Vehículo: ${vehicleTitle}\n` +
@@ -153,7 +163,7 @@ export default function TestDriveForm({
       );
 
       setSubmittedLead({
-        leadId: data.leadId,
+        leadId,
         fullName: formData.fullName,
         requestType: formData.requestType,
         vehicleName: vehicleTitle,
@@ -190,7 +200,7 @@ export default function TestDriveForm({
               }}
             >
               <Image
-                src="/images/showroom/fachada-test-drive.jpg"
+                src={withBasePath('/images/showroom/fachada-test-drive.jpg')}
                 alt="Unidad Test Drive frente a Rústicos La Mundial Maracaibo"
                 fill
                 sizes="(max-width: 1080px) 100vw, 480px"

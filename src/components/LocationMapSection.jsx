@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { withBasePath } from '../lib/basePath';
 
 const MARACAIBO_COORDS = {
   lat: 10.6695,
@@ -75,7 +76,7 @@ export default function LocationMapSection() {
               }}
             >
               <Image
-                src="/images/showroom/fachada-atardecer.jpg"
+                src={withBasePath('/images/showroom/fachada-atardecer.jpg')}
                 alt="Fachada Oficial Rústicos La Mundial, C.A. en Maracaibo"
                 fill
                 sizes="(max-width: 1080px) 100vw, 480px"

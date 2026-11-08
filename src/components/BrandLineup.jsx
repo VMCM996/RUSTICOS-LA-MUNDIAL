@@ -2,27 +2,28 @@
 
 import Image from 'next/image';
 import BrandLogo from './BrandLogo';
+import { withBasePath } from '../lib/basePath';
 
 const LINEUP_BRANDS = [
   {
     brand: 'Jeep',
     tagline: 'LIBERTAD EN CADA RUTA',
     altText: 'Jeep Renegade, Compass y Grand Cherokee en Maracaibo',
-    image: '/images/vehicles/Sahara2027/SaharaOut1.webp',
+    image: withBasePath('/images/vehicles/Sahara2027/SaharaOut1.webp'),
     btnClass: 'btn-lineup-jeep',
   },
   {
     brand: 'Dodge',
     tagline: 'ACTITUD SIN LÍMITES',
     altText: 'Showroom Oficial Dodge en Rústicos La Mundial Maracaibo',
-    image: '/images/showroom/sede-la-mundial.jpg',
+    image: withBasePath('/images/showroom/sede-la-mundial.jpg'),
     btnClass: 'btn-lineup-dark',
   },
   {
     brand: 'RAM',
     tagline: 'FUERZA QUE TRABAJA CONTIGO',
     altText: 'Camioneta Pick-up RAM 700 y RAM 1500 Lone Star en Maracaibo',
-    image: '/images/vehicles/RAM1500/Ram1500Out2.webp',
+    image: withBasePath('/images/vehicles/RAM1500/Ram1500Out2.webp'),
     btnClass: 'btn-lineup-dark',
   },
 ];

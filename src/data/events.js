@@ -1,3 +1,5 @@
+import { withBasePath } from '../lib/basePath';
+
 export const EVENT_CATEGORIES = [
   'Todos',
   'Lanzamientos',
@@ -6,7 +8,7 @@ export const EVENT_CATEGORIES = [
   'Videos',
 ];
 
-export const EVENTS = [
+const RAW_EVENTS = [
   {
     id: 'recepcion-flota-2026-maracaibo',
     title: 'Arribo de Nuevas Unidades 2026 a Rústicos La Mundial — Sede Maracaibo',
@@ -80,3 +82,11 @@ export const EVENTS = [
     ],
   },
 ];
+
+export const EVENTS = RAW_EVENTS.map((event) => ({
+  ...event,
+  coverImage: withBasePath(event.coverImage),
+  videoUrl: event.videoUrl ? withBasePath(event.videoUrl) : event.videoUrl,
+  gallery: Array.isArray(event.gallery) ? event.gallery.map(withBasePath) : [],
+}));
+

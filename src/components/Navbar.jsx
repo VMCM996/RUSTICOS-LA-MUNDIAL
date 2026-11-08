@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import BrandLogo from './BrandLogo';
+import { withBasePath } from '../lib/basePath';
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '584125554440';
 
@@ -49,7 +50,7 @@ export default function Navbar({ onSelectBrandFilter }) {
               aria-label="Rústicos La Mundial — Ir al inicio"
             >
               <Image
-                src="/images/logos/rusticos-la-mundial.svg"
+                src={withBasePath('/images/logos/rusticos-la-mundial.svg')}
                 alt="Logo Oficial Rústicos La Mundial"
                 width={148}
                 height={48}
