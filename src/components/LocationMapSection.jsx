@@ -57,7 +57,7 @@ export default function LocationMapSection() {
               src={embedUrl}
               width="100%"
               height="100%"
-              style={{ border: 0, display: 'block', width: '100%', height: '100%', minHeight: '440px', flex: 1 }}
+              className="location-map-iframe"
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

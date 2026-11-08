@@ -75,10 +75,10 @@ export default function VehicleModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="modal-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div className="modal-header-title-group">
             <BrandLogo brand={vehicle.brand} variant="light" size="md" />
             <div>
-              <h2 id="modal-vehicle-title" style={{ fontSize: '1.35rem' }}>
+              <h2 id="modal-vehicle-title" className="modal-vehicle-heading">
                 {vehicle.model} {vehicle.trim ? `• ${vehicle.trim}` : ''}
               </h2>
               <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
@@ -89,7 +89,7 @@ export default function VehicleModal({
           <button
             ref={closeBtnRef}
             type="button"
-            className="btn btn-outline"
+            className="btn btn-outline modal-close-btn"
             onClick={onClose}
             aria-label="Cerrar ventana de detalles"
           >
@@ -166,8 +166,10 @@ export default function VehicleModal({
             <div
               style={{
                 display: 'flex',
+                flexWrap: 'wrap',
                 justifyContent: 'space-between',
                 alignItems: 'baseline',
+                gap: '0.5rem',
                 paddingBottom: '1rem',
                 borderBottom: '1px solid var(--border-light)',
               }}
@@ -175,7 +177,7 @@ export default function VehicleModal({
               <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
                 Precio y Condiciones
               </span>
-              <span className="card-price" style={{ fontSize: '1.5rem' }}>
+              <span className="card-price" style={{ fontSize: 'clamp(1.15rem, 2.2vw, 1.5rem)' }}>
                 Consultar con un Asesor
               </span>
             </div>

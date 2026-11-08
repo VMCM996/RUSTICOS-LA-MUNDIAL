@@ -16,6 +16,7 @@ export default function Navbar({ onSelectBrandFilter }) {
       onSelectBrandFilter(brand);
     }
     setActiveNav('#catalogo');
+    setMobileMenuOpen(false);
     const el = document.getElementById('catalogo');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
@@ -59,7 +60,7 @@ export default function Navbar({ onSelectBrandFilter }) {
               />
             </a>
 
-            <span className="brand-divider" aria-hidden="true" />
+            <span className="brand-divider header-location-divider" aria-hidden="true" />
 
             <a
               href="#ubicacion"
@@ -142,7 +143,7 @@ export default function Navbar({ onSelectBrandFilter }) {
 
             <button
               type="button"
-              className="hamburger-btn"
+              className={`hamburger-btn ${mobileMenuOpen ? 'is-active' : ''}`}
               aria-label="Alternar menú de navegación"
               aria-expanded={mobileMenuOpen}
               onClick={() => setMobileMenuOpen((prev) => !prev)}
@@ -161,6 +162,32 @@ export default function Navbar({ onSelectBrandFilter }) {
         aria-label="Navegación principal"
       >
         <div className="container">
+          <div className="mobile-brand-strip" aria-label="Filtrar por marca oficial">
+            <button
+              type="button"
+              className="header-brand-btn"
+              onClick={() => handleBrandClick('Jeep')}
+            >
+              <BrandLogo brand="Jeep" size="sm" />
+            </button>
+            <span className="brand-divider" aria-hidden="true" />
+            <button
+              type="button"
+              className="header-brand-btn"
+              onClick={() => handleBrandClick('Dodge')}
+            >
+              <BrandLogo brand="Dodge" size="sm" />
+            </button>
+            <span className="brand-divider" aria-hidden="true" />
+            <button
+              type="button"
+              className="header-brand-btn"
+              onClick={() => handleBrandClick('RAM')}
+            >
+              <BrandLogo brand="RAM" size="sm" />
+            </button>
+          </div>
+
           <ul className="header-nav-list">
             <li>
               <a
