@@ -14,6 +14,7 @@ import LocationMapSection from '@/components/LocationMapSection';
 import TestDriveForm from '@/components/TestDriveForm';
 import VehicleModal from '@/components/VehicleModal';
 import Footer from '@/components/Footer';
+import ScrollReveal from '@/components/ScrollReveal';
 
 export default function HomePage() {
   const [modalVehicle, setModalVehicle] = useState(null);
@@ -29,8 +30,12 @@ export default function HomePage() {
     }
   };
 
-  const handleBrandFilterSelect = (brand) => {
-    setExternalBrandFilter({ brand, timestamp: Date.now() });
+  const handleBrandFilterSelect = (filterPayload) => {
+    if (typeof filterPayload === 'object' && filterPayload !== null) {
+      setExternalBrandFilter({ ...filterPayload, timestamp: Date.now() });
+    } else {
+      setExternalBrandFilter({ brand: filterPayload, timestamp: Date.now() });
+    }
   };
 
   const handleSelectFinance = (vehicle) => {
@@ -64,6 +69,7 @@ export default function HomePage() {
 
   return (
     <>
+      <ScrollReveal />
       <Navbar onSelectBrandFilter={handleBrandFilterSelect} />
 
       <main>
@@ -81,8 +87,6 @@ export default function HomePage() {
           onSelectFinance={handleSelectFinance}
         />
 
-        <TrustBar />
-
         <PromoBanners
           onSelectPromoAction={(actionPayload) => {
             setPrefilledNote({
@@ -93,6 +97,8 @@ export default function HomePage() {
             });
           }}
         />
+
+        <TrustBar />
 
         <EventsSection />
 

@@ -330,7 +330,7 @@ export const VEHICLES = RAW_VEHICLES.map((vehicle) => ({
   images: Array.isArray(vehicle.images) ? vehicle.images.map(withBasePath) : [],
 }));
 
-export const BRANDS = ['Todas', 'Jeep', 'Dodge', 'RAM'];
+export const BRANDS = ['Todas', 'Jeep', 'RAM'];
 
 export const CATEGORIES = [
   'Todas',

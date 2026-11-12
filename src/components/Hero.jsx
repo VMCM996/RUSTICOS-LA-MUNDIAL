@@ -1,138 +1,174 @@
 'use client';
 
 import Image from 'next/image';
+import BrandLogo from './BrandLogo';
+import { withBasePath } from '../lib/basePath';
 
-export default function Hero({ vehicles, onInspectVehicle }) {
-  const leftHero =
-    vehicles.find((v) => v.id === 'jeep-renegade-sahara-2027') || vehicles[0];
-  const centerHero =
-    vehicles.find((v) => v.id === 'jeep-grand-cherokee-limited-2026') ||
+export default function Hero({ vehicles = [], onInspectVehicle }) {
+  const jeepHero =
+    vehicles.find((v) => v.id === 'jeep-renegade-sahara-2027') ||
+    vehicles.find((v) => v.brand === 'Jeep') ||
+    vehicles[0];
+
+  const ramHero =
+    vehicles.find((v) => v.id === 'ram-1500-lonestar-2026') ||
+    vehicles.find((v) => v.brand === 'RAM') ||
     vehicles[1] ||
     vehicles[0];
-  const rightHero =
-    vehicles.find((v) => v.id === 'ram-700-slt-2026') ||
-    vehicles.find((v) => v.brand === 'RAM') ||
-    vehicles[2] ||
-    vehicles[0];
 
-  const handleKeyActivate = (e, vehicle) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
+  const jeepPhoto =
+    jeepHero?.heroImage || withBasePath('/images/vehicles/Sahara2027/SaharaOut1.webp');
+  const ramPhoto =
+    ramHero?.heroImage || withBasePath('/images/vehicles/RAM1500/Ram1500Out2.webp');
+
+  const handleInspect = (vehicle) => {
+    if (onInspectVehicle && vehicle) {
       onInspectVehicle(vehicle);
     }
   };
 
   return (
-    <section id="inicio" className="hero-panoramic">
-      <div className="hero-sky-overlay" />
+    <section id="inicio" className="hero-dual-cover">
+      {/* Fondo Dividido con las Dos Fotografías en Atmósfera Oscura */}
+      <div className="hero-dual-backdrop" aria-hidden="true">
+        <div className="hero-backdrop-half hero-backdrop-left">
+          <Image
+            src={jeepPhoto}
+            alt="Jeep Todo Terreno en Maracaibo"
+            fill
+            priority
+            sizes="50vw"
+            className="hero-backdrop-img"
+          />
+        </div>
+        <div className="hero-backdrop-half hero-backdrop-right">
+          <Image
+            src={ramPhoto}
+            alt="RAM Pick-up en Maracaibo"
+            fill
+            priority
+            sizes="50vw"
+            className="hero-backdrop-img"
+          />
+        </div>
+        <div className="hero-dual-overlay" />
+      </div>
 
-      <div className="container hero-center-content">
-        <p className="hero-kicker">AVENTURA Y FUERZA EN UN SOLO LUGAR.</p>
+      <div className="container hero-dual-container">
+        {/* Columna Izquierda: Tipografía Monumental + Doble CTA (Inspiración Imagen 1 y 2) */}
+        <div className="hero-dual-copy">
+          <p className="hero-cinematic-kicker">
+            CONCESIONARIO AUTORIZADO — MARACAIBO, VENEZUELA
+          </p>
 
-        <h1 className="hero-trinity-title">
-          <span className="trinity-jeep">JEEP</span>
-          <span className="trinity-slash">/</span>
-          <span className="trinity-dodge">DODGE</span>
-          <span className="trinity-slash">/</span>
-          <span className="trinity-ram">RAM</span>
-        </h1>
+          <h1 className="hero-dual-title">
+            <span>AVENTURA 4X4 Y</span>
+            <span>FUERZA SIN LÍMITES</span>
+            <span className="hero-title-accent">EN UN SOLO LUGAR</span>
+          </h1>
 
-        <p className="hero-subkicker">
-          CAPACIDAD 4X4 <span>/</span> POTENCIA <span>/</span> PRESTIGIO
-        </p>
+          <p className="hero-dual-subtitle">
+            Descubre el respaldo oficial de <strong>Jeep</strong>, <strong>RAM</strong> y{' '}
+            <strong>Dodge</strong> en Rústicos La Mundial. Unidades 0 km de entrega
+            inmediata, financiamiento a medida y servicio certificado Mopar® en Calle 72,
+            Tierra Negra.
+          </p>
 
-        <p className="hero-lead">
-          En Rústicos La Mundial unimos la libertad todoterreno de Jeep, el carácter de
-          Dodge y la fuerza imparable de RAM para brindarte respaldo oficial en Maracaibo.
-        </p>
+          <div className="hero-dual-actions">
+            <a href="#test-drive" className="btn-hero-outline">
+              AGENDA TU CITA
+            </a>
+            <a href="#catalogo" className="btn-hero-red">
+              VER VEHÍCULOS
+            </a>
+          </div>
+        </div>
 
-        <div className="hero-cta-wrap">
-          <a href="#catalogo" className="btn-dark-pill">
-            <span>CONOCE NUESTRO INVENTARIO</span>
-            <span aria-hidden="true">→</span>
-          </a>
-          <a href="#test-drive" className="btn-light-pill">
-            <span>CONSULTAR CON UN ASESOR</span>
-          </a>
+        {/* Columna Derecha: Composición Destacada con las Dos Fotos Interactivas (Jeep & RAM) */}
+        <div className="hero-two-photos-stage">
+          {/* Foto 1: Jeep */}
+          <article
+            className="hero-photo-card hero-photo-jeep"
+            onClick={() => handleInspect(jeepHero)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleInspect(jeepHero);
+              }
+            }}
+            aria-label="Explorar Jeep Renegade Sahara 2027"
+          >
+            <Image
+              src={jeepPhoto}
+              alt="Jeep Renegade Sahara 2027 en acción todoterreno"
+              fill
+              priority
+              sizes="(max-width: 960px) 100vw, 32vw"
+              className="hero-photo-card-img"
+            />
+            <div className="hero-photo-card-gradient" />
+            <div className="hero-photo-card-meta">
+              <div className="hero-photo-brand-row">
+                <BrandLogo brand="Jeep" variant="light" size="sm" />
+                <span className="hero-photo-badge">AVENTURA 4X4</span>
+              </div>
+              <strong className="hero-photo-model">
+                {jeepHero ? `${jeepHero.model} (${jeepHero.year})` : 'RENEGADE SAHARA 2027'}
+              </strong>
+              <span className="hero-photo-cta">Ver ficha técnica →</span>
+            </div>
+          </article>
+
+          {/* Foto 2: RAM */}
+          <article
+            className="hero-photo-card hero-photo-ram"
+            onClick={() => handleInspect(ramHero)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleInspect(ramHero);
+              }
+            }}
+            aria-label="Explorar RAM 1500 Lone Star 2026"
+          >
+            <Image
+              src={ramPhoto}
+              alt="Camioneta RAM 1500 Lone Star Hurricane 4x4"
+              fill
+              priority
+              sizes="(max-width: 960px) 100vw, 32vw"
+              className="hero-photo-card-img"
+            />
+            <div className="hero-photo-card-gradient" />
+            <div className="hero-photo-card-meta">
+              <div className="hero-photo-brand-row">
+                <BrandLogo brand="RAM" variant="light" size="sm" />
+                <span className="hero-photo-badge hero-photo-badge-red">
+                  HURRICANE 420 HP
+                </span>
+              </div>
+              <strong className="hero-photo-model">
+                {ramHero ? `${ramHero.model} (${ramHero.year})` : '1500 LONE STAR 2026'}
+              </strong>
+              <span className="hero-photo-cta">Ver ficha técnica →</span>
+            </div>
+          </article>
         </div>
       </div>
 
-      {/* Tri-Vehicle Stage over Mountain/City Panorama */}
-      <div className="container hero-trio-stage">
-        <div
-          className="trio-vehicle-card trio-left"
-          onClick={() => onInspectVehicle(leftHero)}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => handleKeyActivate(e, leftHero)}
-          aria-label={`Ver detalles de ${leftHero.brand} ${leftHero.model}`}
-        >
-          <div className="trio-vehicle-frame">
-            <Image
-              src={leftHero.heroImage || leftHero.images[0]}
-              alt={`${leftHero.brand} ${leftHero.model} en exhibición en Maracaibo`}
-              fill
-              priority
-              sizes="(max-width: 860px) 100vw, 33vw"
-            />
-          </div>
-          <div className="trio-caption">
-            <span className="trio-tag trio-tag-jeep">
-              {leftHero.brand.toUpperCase()} {leftHero.model}
-            </span>
-          </div>
-        </div>
-
-        <div
-          className="trio-vehicle-card trio-center"
-          onClick={() => onInspectVehicle(centerHero)}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => handleKeyActivate(e, centerHero)}
-          aria-label={`Ver detalles de ${centerHero.brand} ${centerHero.model}`}
-        >
-          <div className="trio-vehicle-frame">
-            <Image
-              src={centerHero.heroImage || centerHero.images[0]}
-              alt={`${centerHero.brand} ${centerHero.model} disponible en Maracaibo`}
-              fill
-              priority
-              sizes="(max-width: 860px) 100vw, 36vw"
-            />
-          </div>
-          <div className="trio-caption">
-            <span className="trio-tag trio-tag-jeep">
-              {centerHero.brand.toUpperCase()} {centerHero.model}
-            </span>
-          </div>
-        </div>
-
-        <div
-          className="trio-vehicle-card trio-right"
-          onClick={() => onInspectVehicle(rightHero)}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => handleKeyActivate(e, rightHero)}
-          aria-label={`Ver detalles de ${rightHero.brand} ${rightHero.model}`}
-        >
-          <div className="trio-vehicle-frame">
-            <Image
-              src={rightHero.heroImage || rightHero.images[0]}
-              alt={`Camioneta Pick-up ${rightHero.brand} ${rightHero.model} en Maracaibo`}
-              fill
-              priority
-              sizes="(max-width: 860px) 100vw, 33vw"
-            />
-          </div>
-          <div className="trio-caption">
-            <span className="trio-tag trio-tag-ram">
-              {rightHero.brand.toUpperCase()} {rightHero.model}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div className="hero-asphalt-floor" />
+      {/* Indicador Inferior DESPLAZA */}
+      <a
+        href="#buscador"
+        className="hero-scroll-indicator"
+        aria-label="Desplazar hacia el buscador y catálogo"
+      >
+        <span className="hero-scroll-text">DESPLAZA</span>
+        <span className="hero-scroll-line" aria-hidden="true" />
+      </a>
     </section>
   );
 }
